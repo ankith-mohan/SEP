@@ -1,5 +1,5 @@
 # SEP
-Stronger Bounds on the Quantum Separability Problem
+Inner Approximations and NISQ Algorithms for the Separability Problem
 
 
 ## Requirements
