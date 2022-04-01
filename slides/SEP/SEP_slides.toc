@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Problem}{2}{0}{1}
+\beamer@sectionintoc {2}{Upper Bounds}{4}{0}{2}
+\beamer@sectionintoc {3}{Lower Bounds}{7}{0}{3}
+\beamer@sectionintoc {4}{Square root}{13}{0}{4}
+\beamer@sectionintoc {5}{Quantification}{21}{0}{5}
+\beamer@sectionintoc {6}{NSS}{23}{0}{6}
+\beamer@sectionintoc {7}{Results}{33}{0}{7}

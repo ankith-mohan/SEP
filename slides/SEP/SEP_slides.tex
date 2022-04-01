@@ -1,0 +1,330 @@
+\documentclass{beamer}
+\usetheme{Warsaw}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{multimedia}
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
+\usepackage{physics}
+\usepackage{float}
+\setbeamertemplate{footline}[frame number] 
+
+\newcommand{\snote}[1]{\textcolor{blue}{[*** Jamie : #1 ***]}}
+
+\title[SEP]{Inner Approximations and a NISQ Algorithm for the Quantum Separability Problem}
+\subtitle{\url{https://github.com/ankith-mohan/SEP}}
+\author{
+    Jamie Sikora
+    \And
+    Ankith Mohan
+}
+\institute{
+    Virginia Tech
+}
+\date{11/15/2021}
+
+\SetKwInput{KwInput}{Input}
+\SetKwInput{KwOutput}{Output}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\AtBeginSection[]
+{
+  \begin{frame}{Outline}
+    \tableofcontents[currentsection]
+  \end{frame}
+}
+
+%\begin{frame} 
+%\snote{Have an slide for each bound. $\alpha$ own slide and motivation. UPPER BOUNDS. $\beta$ for each bound. Symmetric extensions, mention how this set is larger then SEP, and thus $\beta \geq \alpha$. Mention realignment, and how this also relaxes $SEP$ (lower priority). Mention PPT and how this relaxes SEP. Summary slide: $\alpha \leq \min\{ \beta_1, \ldots, \}$.  
+%        LOWER BOUNDS. Discuss see saw (in general) whole slide. OG see saw (whole slide). OG2. Randomized. $\alpha \geq \max \{ \gamma_1, \ldots \}$. 
+%        SQUARE ROOT (special, new). Explain the "square root bound" ($\delta'$). Explain how they are/are not SDPs. Define $\delta$. 
+%        SUMMARY. $\delta, \gamma, \ldots, \leq \alpha \leq \delta', \beta_1, \ldots$. Explain now that we want to test to see how good we are approximating $\alpha$.
+%        New CHUNK: how to quantify goodness of bounds.
+%        New Chunk: NISQ. Explain going from Big SEP problem to small SEP problem (why these bounds are useful).}
+%\end{frame}
+
+\section{Problem}
+    \begin{frame}{Problem Statement}
+        \begin{itemize}
+            \item[] Given a density matrix $\mathbf{\rho} \in Pos(\mathcal{A}\otimes\mathcal{B})$, we want to say whether or not $\mathbf{\rho}$ is entangled?
+            \item[] Formally, define 
+            $$
+                SEP(\mathcal{X}:\mathcal{Y}) = \left\{\sum\limits_{i=1}^{k}p_{i}\ket{\psi_{i}}\bra{\psi_{i}} \otimes \ket{\phi_{i}}\bra{\phi_{i}}: \sum\limits_{i=1}^{k}p_{i} = 1, p_{i} \ge 0\ \forall\ i\right\}
+            $$
+            \item[] We want to compute
+            $$
+                \alpha = \sup\limits_{\mathbf{\rho}_{\alpha} \in SEP}\langle\mathbf{\rho}_{\alpha}, \mathbf{\Pi}\rangle
+            $$
+            \item[] This is shown to be an NP-hard problem\footnote{\cite{gurvits2004classical}}
+        \end{itemize}
+    \end{frame}    
+    
+\section{Upper Bounds}
+    \begin{frame}{Symmetric Extensions}
+        \begin{itemize}
+            \item[] Instead of asking whether or not $\mathbf{\rho}$ is entangled?
+            \item[] We ask whether $\mathbf{\rho}$ is symmetric extendible?
+            \item[] We compute
+            $$
+                \beta_{k} = \sup\limits_{\mathbf{\rho}_{\beta_{k}} \in SymExt(k)}\langle\mathbf{\rho}_{\beta_{k}}, \Pi\rangle
+            $$
+            \item[] $\because SEP = \bigcap_{k=1}^{\infty}SymExt(k)$
+            \item[] $\implies \beta_{1} \ge \beta_{2} \ge \dots \ge \beta_{k} \ge \alpha$
+        \end{itemize}
+    \end{frame}
+    
+    %\begin{frame}{Realignment}
+    %    \begin{itemize}
+    %        \item[] Find
+    %        $$
+    %            \beta_{r} = \sup\limits_{\mathbf{\rho}_{\beta_{r}} \in Rlmt}\langle\mathbf{\rho}_{\beta_{r}}, \Pi\rangle
+    %        $$
+    %    \end{itemize}
+    %\end{frame}
+    
+    \begin{frame}{Summary}
+        $$
+             \alpha \le \{\beta_{r}, \beta_{1}, \dots, \beta_{k}\}
+        $$
+    \end{frame}
+    
+\section{Lower Bounds}
+    \begin{frame}{See-saw}
+        \begin{algorithm}[H]
+            \KwInput{$\mathbf{\sigma}_{A} \in Pos(\mathcal{A}),\ \mathbf{\Pi}$} 
+            \KwOutput{$\gamma$}
+            \Repeat{convergence or maximum number of iterations}{
+                $\mathbf{\sigma}_{B}: \sup\limits_{\mathbf{\sigma}_{B} \in Pos(\mathcal{B})}\langle\mathbf{\sigma}_{A}\otimes\mathbf{\sigma}_{B}, \mathbf{\Pi}\rangle$ \\
+                $\mathbf{\sigma}_{A}: \sup\limits_{\mathbf{\sigma}_{A} \in Pos(\mathcal{A})}\langle\mathbf{\sigma}_{A}\otimes\mathbf{\sigma}_{B}, \mathbf{\Pi}\rangle$
+            }
+            $\gamma = \langle\mathbf{\sigma}_{A}\otimes\mathbf{\sigma}_{B}, \mathbf{\Pi}\rangle$
+            \caption{see-saw}
+        \end{algorithm}
+    \end{frame}
+    
+    \begin{frame}{Maximally-mixed (MM) see-saw}
+        $$
+            \gamma_{MM} = \mbox{see-saw}\left(\frac{1}{\dim\mathcal{A}}\,\mathbb{I}, \mathbf{\Pi}\right)
+        $$
+    \end{frame}
+    
+    \begin{frame}{Uniform superposition (US) see-saw}
+        $$
+            \gamma_{US} = \mbox{see-saw}\left(\frac{1}{\dim\mathcal{A}}\,\sum\limits_{i}\ket{i}\bra{i}, \mathbf{\Pi}\right)
+        $$
+    \end{frame}
+    
+    \begin{frame}{Randomized see-saw}
+        \begin{algorithm}[H]
+            \KwInput{$\mathbf{\Pi},\,N_{rand}$} 
+            \KwOutput{$\gamma_{rand}$}
+            $\gamma_{list} \rightarrow \{\emptyset\}$ \\
+            \For{$i \rightarrow 1:N_{rand}$}{
+                Initialize $\mathbf{\sigma}_{A}$ to be a random matrix in $Pos(\mathcal{A})$ \\
+                $\gamma_{list}(i) = \mbox{see-saw}(\mathbf{\sigma}_{A}, \mathbf{\Pi})$
+            }
+            $\gamma_{rand} = \max\{\gamma_{list}\}$
+            \caption{random see-saw}
+        \end{algorithm}
+    \end{frame}
+    
+    \begin{frame}{Summary}
+        $$
+            \{\gamma_{MM}, \gamma_{US}, \gamma_{rand}\} \le \alpha
+        $$
+    \end{frame}
+    
+\section{Square root}
+    \begin{frame}{Idea}
+        $$
+            \sup\limits_{\mathbf{\sigma}_{A}\in Pos(\mathcal{A}), \mathbf{\sigma}_{B}\in Pos(\mathcal{B})}\langle\mathbf{\sigma}_{A}\otimes\mathbf{\sigma}_{B}, \mathbf{\Pi}\rangle \le \sup\limits_{\mathbf{\sigma}_{A}\in Pos(\mathcal{A}), \mathbf{\sigma}_{B}\in Pos(\mathcal{B})}\langle\sqrt{\mathbf{\sigma}_{A}}\otimes\sqrt{\mathbf{\sigma}_{B}}, \mathbf{\Pi}\rangle
+        $$
+        \footnote{This inequality holds only when $\mathbf{\Pi}$ is a PSD matrix}
+    \end{frame}
+    
+    \begin{frame}{Idea}
+        $$
+            \textcolor{red}{\sup\limits_{\mathbf{\sigma}_{A}\in Pos(\mathcal{A}), \mathbf{\sigma}_{B}\in Pos(\mathcal{B})}\langle\mathbf{\sigma}_{A}\otimes\mathbf{\sigma}_{B}, \mathbf{\Pi}\rangle} \le \sup\limits_{\mathbf{\sigma}_{A}\in Pos(\mathcal{A}), \mathbf{\sigma}_{B}\in Pos(\mathcal{B})}\langle\sqrt{\mathbf{\sigma}_{A}}\otimes\sqrt{\mathbf{\sigma}_{B}}, \mathbf{\Pi}\rangle
+        $$
+        \textcolor{red}{This is not SDP :(} \\
+        \footnote{$\mathbf{\Pi}$ is a PSD matrix}
+    \end{frame}
+    
+    \begin{frame}{Idea}
+        $$
+            \textcolor{red}{\sup\limits_{\mathbf{\sigma}_{A}\in Pos(\mathcal{A}), \mathbf{\sigma}_{B}\in Pos(\mathcal{B})}\langle\mathbf{\sigma}_{A}\otimes\mathbf{\sigma}_{B}, \mathbf{\Pi}\rangle} \le \textcolor{violet}{\sup\limits_{\mathbf{\sigma}_{A}\in Pos(\mathcal{A}), \mathbf{\sigma}_{B}\in Pos(\mathcal{B})}\langle\sqrt{\mathbf{\sigma}_{A}}\otimes\sqrt{\mathbf{\sigma}_{B}}, \mathbf{\Pi}\rangle}
+        $$
+        \textcolor{red}{This is not SDP :(}\hfill\textcolor{violet}{This is SDP :)} \\
+        \footnote{This inequality only holds when $\mathbf{\Pi}$ is a PSD matrix}
+    \end{frame}
+    
+    \begin{frame}{How do we solve this?}
+        \begin{align*}
+            \mu = \sup\limits_{\mathbf{W}\in Herm(\mathcal{A}\otimes\mathcal{B})}\langle\mathbf{W}, \mathbf{\Pi}\rangle \\
+            \mbox{subject to} \\
+            \left[\begin{array}{cc}
+                \mathbf{\sigma}_{A_{\delta}}\otimes\mathbb{I}_{\dim\mathcal{A}} & \mathbf{W} \\
+                \mathbf{W} & \mathbb{I}_{\dim\mathcal{B}}\otimes\mathbf{\sigma}_{B_{\delta}}
+            \end{array}\right] &\ge 0 \\
+            \mathbf{\sigma}_{A_{\delta}} &\ge 0 \\
+            \Tr{\mathbf{\sigma}_{A_{\delta}}} &= 1 \\
+            \mathbf{\sigma}_{B_{\delta}} &\ge 0 \\
+            \Tr{\mathbf{\sigma}_{B_{\delta}}} &= 1
+        \end{align*}
+        $\sigma_{A_{\delta}}$ and $\sigma_{B_{\delta}}$ correspond to the optimal solution.
+    \end{frame}
+    
+    \begin{frame}{New bound}
+        \begin{itemize}
+            \item[] 
+            $$
+                \langle\sigma_{A_{\delta}}\otimes\sigma_{B_{\delta}}, \mathbf{\Pi}\rangle \le \alpha \le \langle\sqrt{\mathbf{\sigma}_{A_{\delta}}}\otimes\sqrt{\mathbf{\sigma}_{B_{\delta}}}, \mathbf{\Pi}\rangle
+            $$
+            where
+            $$
+                \alpha = \sup\limits_{\mathbf{\rho}_{\alpha} \in SEP}\langle\mathbf{\rho}_{\alpha}, \mathbf{\Pi}\rangle
+            $$
+        \end{itemize}
+    \end{frame}
+    
+    \begin{frame}{New bound}
+        \begin{itemize}
+            \item[] 
+            $$
+                \gamma_{sqrt} = \mbox{see-saw}(\mathbf{\sigma}_{A_{\delta}}, \mathbf{\Pi}) \le \alpha \le \beta_{sqrt} = \langle\sqrt{\mathbf{\sigma}_{A_{\delta}}}\otimes\sqrt{\mathbf{\sigma}_{B_{\delta}}}, \mathbf{\Pi}\rangle
+            $$
+            where
+            $$
+                \alpha = \sup\limits_{\mathbf{\rho}_{\alpha} \in SEP}\langle\mathbf{\rho}_{\alpha}, \mathbf{\Pi}\rangle
+            $$
+        \end{itemize}
+        \footnote{This inequality only holds when $\mathbf{\Pi}$ is a PSD matrix.}
+    \end{frame}
+    
+    \begin{frame}{Summary}
+        $$
+            \{\gamma_{MM}, \gamma_{US}, \gamma_{rand}, \gamma_{sqrt}\} \le \alpha \le \{\beta_{sqrt}, \beta_{r}, \beta_{1}, \dots, \beta_{k}\}
+        $$
+    \end{frame}
+    
+    \section{Quantification}
+        \begin{frame}{Quantification}
+            \begin{itemize}
+                \item[] How well are we really approximating $\alpha$?
+                \item[] Define ``Tightness of Bound" (TOB) as
+                $$
+                    ToB = \beta - \gamma
+                $$
+                where
+                \item[] 
+                $$
+                    \beta = \min\{\beta_{sqrt}, \beta_{r}, \beta_{1}, \dots, \beta_{k}\}
+                $$
+                \item[]
+                $$
+                    \gamma = \max\{\gamma_{MM}, \gamma_{US}, \gamma_{rand}, \gamma_{sqrt}\}
+                $$
+            \end{itemize}
+        \end{frame}
+    
+    \section{NSS}
+        \begin{frame}{Hybrid density matrix ansatz}
+            \begin{itemize}
+                \item[] Alice: $\{\ket{\psi_{i}}\}_{i=1}^{N} \in \mathcal{A}$
+                \item[] Bob: $\{\ket{\phi_{j}}\}_{j=1}^{M} \in \mathcal{B}$
+                \item[]
+                $$
+                    \mathbf{X} = \sum\limits_{ijkl}\beta_{ijkl}\ket{\psi_{i}}\bra{\psi_{j}}\otimes\ket{\phi_{k}}\bra{\phi_{l}}
+                $$
+            \end{itemize}
+        \end{frame}
+        
+        \begin{frame}{Original Problem}
+            \begin{align*}
+                \sup\langle\mathbf{X}, \mathbf{\Pi}\rangle \\
+                \mbox{subject to} \\
+                Tr(\mathbf{X}) &= 1 \\
+                \mathbf{X} &\in SEP(\mathcal{A}:\mathcal{B})
+            \end{align*}
+        \end{frame}
+
+        \begin{frame}{Lemma}
+            $$
+                \mathbf{\beta} \in Herm(\mathcal{A}' \otimes \mathcal{B}')
+            $$
+            where
+            \begin{align*}
+                dim(\mathcal{A}') &<< dim(\mathcal{A}), \\
+                dim(\mathcal{B}') &<< dim(\mathcal{B})
+            \end{align*}
+            \pause
+            \begin{block}{Lemma}
+                $$
+                    \mathbf{\beta} \in SEP(\mathcal{A}' \otimes \mathcal{B}') \implies \mathbf{X} \in SEP(\mathcal{A} \otimes \mathcal{B})
+                $$
+            \end{block}
+        \end{frame}
+
+        \begin{frame}{Problem (Update 1)}
+            \begin{align*}
+                \sup\langle\mathbf{X}, \mathbf{\Pi}\rangle \\
+                \mbox{subject to} \\
+                Tr(\mathbf{X}) &= 1 \\
+                \mathbf{X} &\in SEP(\mathcal{A}:\mathcal{B}) \rightarrow \textcolor{orange}{\mathbf{\beta} \in SEP(\mathcal{A}':\mathbf{B}')}
+            \end{align*}
+        \end{frame}
+
+        \begin{frame}{Objective function}
+            $$
+                \mathbf{\Pi} = \sum\limits_{x}\mathbf{C}_{x}\mathbf{U}_{x}
+            $$
+            \begin{align*}
+                \langle\mathbf{X}, \mathbf{\Pi}\rangle &= \langle\sum\limits_{ijkl}\beta_{ijkl}\ket{\psi_{i}}\bra{\psi_{j}}\otimes\ket{\phi_{k}}\bra{\phi_{l}}, \sum\limits_{x}\mathbf{C}_{x}\mathbf{U}_{x}\rangle \\
+                &= \sum\limits_{ijklx}\beta_{ijkl}\mathbf{C}_{x}\langle\bra{\psi_{j}}\bra{\phi_{l}}\mathbf{U}_{x}\ket{\psi_{i}}\ket{\phi_{k}}\rangle \\
+                &= \sum\limits_{ijkl}\langle\beta_{ijkl}, \sum\limits_{x}\mathbf{C}_{x}d_{ijklx}\rangle \\
+                &= \langle\mathbf{\beta}, \mathcal{D}\rangle
+            \end{align*}
+        \end{frame}
+        
+        \begin{frame}{Problem (Update 2)}
+            \begin{align*}
+                \sup\langle\mathbf{X}, \mathbf{\Pi}\rangle \rightarrow \textcolor{orange}{\sup\langle\mathbf{\beta}, \mathcal{D}\rangle} \\
+                \mbox{subject to} \\
+                Tr(\mathbf{X}) &= 1 \\
+                \mathbf{X} &\in SEP(\mathcal{A}:\mathcal{B}) \rightarrow \textcolor{orange}{\mathbf{\beta} \in SEP(\mathcal{A}':\mathcal{B}')}
+            \end{align*}
+        \end{frame}
+
+        \begin{frame}{Density matrix constraint}
+            \begin{align*}
+                Tr(\mathbf{X}) &= Tr(\sum\limits_{ijkl}\beta_{ijkl}\ket{\psi_{i}}\bra{\psi_{j}}\otimes\ket{\phi_{k}}\bra{\phi_{l}}) \\
+                &= \sum\limits_{ijkl}\beta_{ijkl}\braket{\psi_{j}}{\psi_{i}}\braket{\phi_{l}}{\phi_{k}} \\
+                &= \sum\limits_{ijkl}\langle\beta_{ijkl}, e_{ijkl}\rangle \\
+                &= \langle\mathbf{\beta}, \mathcal{E}\rangle
+            \end{align*}
+        \end{frame}
+
+        \begin{frame}{Modified Problem}
+            \begin{align*}
+                \sup\langle\mathbf{X}, \mathbf{\Pi}\rangle \rightarrow \textcolor{orange}{\sup\langle\mathbf{\beta}, \mathcal{D}\rangle} \\
+                \mbox{subject to} \\
+                Tr(\mathbf{X}) &= 1 \rightarrow \textcolor{orange}{\langle\mathbf{\beta}, \mathcal{E}\rangle = 1} \\
+                \mathbf{X} &\in SEP(\mathcal{A}:\mathcal{B}) \rightarrow \textcolor{orange}{\mathbf{\beta} \in SEP(\mathcal{A}':\mathcal{B}')}
+            \end{align*}
+        \end{frame}
+
+    \section{Results}
+        \begin{frame}{Competing hypotheses}
+            \begin{enumerate}
+                \item (Jamie): $\gamma_{rand}$ should work better for smaller values of $d$. Intuitively, smaller values of $d$ correspond to a smaller number of baskets. So starting from a set of random starting points, it is highly likely that we are going to reach the global optimum.
+                \item (Kishor): $\gamma_{rand}$ might not work well for smaller values of $d$ because here we will be dealing with a bad landscape. As the value of $d$ increases, the landscape becomes more smooth and we would expect to reach the optimum more easily.
+            \end{enumerate}
+        \end{frame}
+
+\bibliographystyle{apalike}
+\bibliography{refs}
+    
+\end{document}
