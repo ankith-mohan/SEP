@@ -1,0 +1,32 @@
+\begin{thebibliography}{}
+
+\bibitem[Chen et~al., 2014]{chen2014SymExt}
+Chen, J., Ji, Z., Kribs, D., Lütkenhaus, N., and Zeng, B. (2014).
+\newblock Symmetric extension of two-qubit states.
+\newblock {\em Physical Review A}, 90(3).
+
+\bibitem[Chen and Wu, 2003]{chen2003realignment}
+Chen, K. and Wu, L.-A. (2003).
+\newblock A matrix realignment method for recognizing entanglement.
+
+\bibitem[Gurvits, 2003]{gurvitz2003}
+Gurvits, L. (2003).
+\newblock Classical deterministic complexity of edmonds' problem and quantum
+  entanglement.
+
+\bibitem[Horodecki et~al., 1996]{horodecki1996PPT}
+Horodecki, M., Horodecki, P., and Horodecki, R. (1996).
+\newblock Separability of mixed states: necessary and sufficient conditions.
+\newblock {\em Physics Letters A}, 223(1–2):1–8.
+
+\bibitem[Li et~al., 2019]{li2019BosExt}
+Li, Y., Huang, S., Ruan, D., and Zeng, B. (2019).
+\newblock Symmetric versus bosonic extension for bipartite states.
+\newblock {\em Physical Review A}, 99(1).
+
+\bibitem[Peres, 1996]{peres1996PPT}
+Peres, A. (1996).
+\newblock Separability criterion for density matrices.
+\newblock {\em Physical Review Letters}, 77(8):1413–1415.
+
+\end{thebibliography}
