@@ -1,5 +1,6 @@
 function [rho_k, beta_k] = computebeta_k_sum(K_list, L_list, N_summands, ...
-                                                dim_B, k)
+                                                dim_B, k, PPT)
+    % Symmetric Extensions with or without PPT
     dim = size(K_list{1}, 1) * size(L_list{1}, 1);
     cvx_begin sdp quiet
         variable rho_k(dim, dim) complex semidefinite;
@@ -11,7 +12,7 @@ function [rho_k, beta_k] = computebeta_k_sum(K_list, L_list, N_summands, ...
         maximize obj
         subject to
             trace(rho_k) == 1; % density matrix constraint
-            SymmetricExtension(rho_k, k, dim_B, 1, 0, eps^(1/4)); 
+            SymmetricExtension(rho_k, k, dim_B, PPT, 0, eps^(1/4)); 
             % Symmetric extension constraint
     cvx_end
     beta_k = 0;

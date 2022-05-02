@@ -1,3 +1,11 @@
+%%  GENHERM  Generates a complex Hermitian matrix of the input dimensionality
+%   This function has one required input argument:
+%       DIM: integer that describes the local dimension of the matrix
+%
+%   H = genHerm(DIM) is a Hermitian matrix of size dim x dim
+%
+
+
 function H = genHerm(dim)
     % GENHERM Generate a complex Hermitian matrix of desired dimensionality 
     %   H = GENHERM(dim) generates a dim x dim complex Hermitian matrix
