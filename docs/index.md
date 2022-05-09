@@ -1,6 +1,10 @@
 **SEP** is a MATLAB toolbox for computing bounds on the separability problem.
 
 ## List of functions
+### Upper bounds
+These are the functions that correspond to relaxations of the separability set
+- [computebeta_k](/SDPs/UpperBounds/computebeta_k.md): Computes the density matrix and the optimal value for the SDP involving the Symmetric Extensions relaxation
+
 ### Helper functions
 These are functions that serve auxillary roles with SEP. As an end-user they might not be useful, but are listed anyway.
 - [HSIP](/helpers/HSIP.md): Computes the Hilbert-Schmidt inner product between the input matrices.

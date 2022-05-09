@@ -6,7 +6,7 @@
 %
 %   URL: https://ankith-mohan.github.io/SEP/helpers/genPos.html
 %
-%   requires: IsPSD (QETLAB)
+%   requires: IsPSD (http://www.qetlab.com/IsPSD)
 %   author: Ankith Mohan (ankithmo@vt.edu)
 %   last updated: May 2, 2022
 
