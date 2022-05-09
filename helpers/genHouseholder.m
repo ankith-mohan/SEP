@@ -1,7 +1,21 @@
+%%  GENHOUSEHOLDER  Generates a complex Hermitian or Positive Semidefinite matrix of the input dimensionality
+%   This function has two required arguments:
+%       DIM: integer that describes the local dimension of the matrix
+%       OPT: ``Pos" if positive semidefinite matrix is required
+%            ``Herm" if Hermitian matrix is required
+%
+%   M = genHouseholder(DIM, OPT) is a Hermitian or Positive Semidefinite
+%   matrix of size dim x dim
+%
+%   These matrices can be used in CVX or QETLAB.
+%
+%   URL: https://ankith-mohan.github.io/SEP/helpers/genHouseholder.html
+%
+%   author: Ankith Mohan (ankithmo@vt.edu)
+%   last updated: May 2, 2022
+
+
 function M = genHouseholder(dim, opt)
-    % GENPOSHOUSEHOLDER Generate a complex Hermitian matrix of desired dimensionality 
-    %   H = GENPOSHOUSEHOLDER(dim) generates a dim x dim complex Hermitian matrix
-    
     if strcmp(opt, "Pos")
         % Eigenvalues are ``dim" numbers sampled uniformly from [0,1] for PSD
         lambda = rand(1, dim);
@@ -13,16 +27,21 @@ function M = genHouseholder(dim, opt)
     else
         error("Expected 'Herm' or 'Pos' for `opt`, got %s instead.", opt);
     end
-    Lambda = diag(lambda); % Matrix of eigenvalues
-    %%%%%%%%%%%%%%%%%%%% BEWARE OF THIS EXPRESSION %%%%%%%%%%%%%%%%%%%%%%%%
-    M = complex(rand(dim), rand(dim)); % Create a complex matrix
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    [Q, ~] = qr(M); % Use QR decomposition to make the columns of M orthonormal
-    M = Q * Lambda * Q'; % This should make M have a good spread of eigenvalues
-    M = 0.5 * (M + M'); % This should guarantee Hermiticity (especially on the principal diagonal)
+    % Diagonal matrix of eigenvalues
+    Lambda = diag(lambda);
+    % Create a complex matrix
+    M = complex(rand(dim), rand(dim));
+    % Use QR decomposition to make the columns of M orthonormal
+    [Q, ~] = qr(M);
+    % This should make M have a good spread of eigenvalues
+    M = Q * Lambda * Q';
+    % This should guarantee Hermiticity (especially on the principal diagonal)
+    M = 0.5 * (M + M');
     if strcmp(opt, "Pos")
-        assert(IsPSD(M) == 1, "Resultant matrix is not PSD"); % Are you really sure its PSD?
+        % Are you really sure its PSD?
+        assert(IsPSD(M) == 1, "Resultant matrix is not PSD");
     else
-        assert(ishermitian(M), "Resultant matrix is not Herm"); % Are you really sure its Herm?
+        % Are you really sure its Herm?
+        assert(ishermitian(M), "Resultant matrix is not Herm");
     end
 end
