@@ -2,9 +2,7 @@
 %   This function has one required input argument:
 %       DIM: integer that describes the local dimension of the matrix
 %
-%   H = genHerm(DIM) is a Hermitian matrix of size dim x dim
-%
-%   These matrices can be used in CVX or QETLAB.
+%   H = genHerm(DIM) is a Hermitian matrix of size DIM x DIM
 %
 %   URL: https://ankith-mohan.github.io/SEP/helpers/genHerm.html
 %
