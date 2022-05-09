@@ -27,10 +27,10 @@ Generates a complex Hermitian or Positive Semidefinite matrix of the input dimen
 ## Notes
 This function does the following:
 1. The spectrum is ``DIM`` numbers sampled uniformly in the range: [0, 1] if ``OPT`` is ``"Pos"``, [-1, 1] if ``OPT`` is ``"Herm"``
-2. This spectrum forms the diagonal entries of the matrix ``&Lambda;``
+2. This spectrum forms the diagonal entries of the matrix ``&#923;``
 3. Creates a random complex matrix ``M``
 4. Orthogonal ``M`` to get the matrix ``Q``
-5. ``M = Q * &Lambda; * Q``
+5. ``M = Q * &#923; * Q``
 6. ``M = 0.5 * (M + M')`` to make ``M`` Hermitian
 7. ``M = M' * M`` if ``OPT`` is ``"Pos"``
 
