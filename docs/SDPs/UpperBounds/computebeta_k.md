@@ -39,13 +39,5 @@ Computes the density matrix and the optimal value for the SDP involving the Symm
 
         0.1088
 
-## Notes
-The SDP corresponding to this function is
-$$
-    \beta = \sup\limits_{\rho \in D(\mathcal{A} \otimes \mathcal{B})} \quad & \langle \rho, \Pi \rangle \\
-    \quad & \rho \in SymmetricExtension(\rho, k) \\
-    \quad & \rho^{T_\mathcal{B}} \succcurlyeq 0 \\
-$$
-
 ## Source Code
 [Source](https://github.com/ankith-mohan/SEP/blob/main/helpers/computebeta_k.m)

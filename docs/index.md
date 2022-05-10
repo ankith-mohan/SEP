@@ -4,6 +4,7 @@
 ### Upper bounds
 These are the functions that correspond to relaxations of the separability set
 - [computebeta_k](/SDPs/UpperBounds/computebeta_k.md): Computes the density matrix and the optimal value for the SDP involving the Symmetric Extensions relaxation
+- [computebeta_kr](/SDPs/UpperBounds/computebeta_kr.md): Computes the density matrix and the optimal value for the SDP involving the Symmetric Extensions as well as the Realignment relaxations
 
 ### Helper functions
 These are functions that serve auxillary roles with SEP. As an end-user they might not be useful, but are listed anyway.
