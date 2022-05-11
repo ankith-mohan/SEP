@@ -11,7 +11,7 @@
 %   SDP BETA_PRIME_KR
 %
 %   URL:
-%   https://ankith-mohan.github.io/SEP/helpers/computebeta_prime_kr.html
+%   https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_prime_kr.html
 %
 %   requires: cvx (http://cvxr.com/cvx), SymmetricExtension
 %   (http://www.qetlab.com/SymmetricExtension), TraceNorm

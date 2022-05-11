@@ -9,7 +9,7 @@
 %   [RHO_KR, BETA_KR] = computebeta_kr(PI, DIM_B, K, PPT) computes the
 %   density matrix RHO_KR and the optimal value of the SDP BETA_KR
 %
-%   URL: https://ankith-mohan.github.io/SEP/helpers/computebeta_kr.html
+%   URL: https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_kr.html
 %
 %   requires: cvx (http://cvxr.com/cvx/), SymmetricExtension
 %   (http://www.qetlab.com/SymmetricExtension), TraceNorm (http://www.qetlab.com/TraceNorm), Realignment (http://www.qetlab.com/Realignment), HSIP.m

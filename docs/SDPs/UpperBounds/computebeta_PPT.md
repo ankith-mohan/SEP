@@ -40,7 +40,7 @@ Computes the density matrix and the optimal value for the SDP involving the PPT 
         0.7051
 
 ## Source Code
-[Source](https://github.com/ankith-mohan/SEP/blob/main/helpers/computebeta_PPT.m)
+[Source](https://github.com/ankith-mohan/SEP/blob/main/SDPs/UpperBounds/computebeta_PPT.m)
 
 ## References
 1. Peres, A. (1996). Separability criterion for density matrices. Physical Review Letters, 77(8), 1413.

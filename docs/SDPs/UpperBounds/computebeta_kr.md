@@ -44,7 +44,7 @@ Computes the density matrix and the optimal value for the SDP involving both the
         0.9003
 
 ## Source Code
-[Source](https://github.com/ankith-mohan/SEP/blob/main/helpers/computebeta_kr.m)
+[Source](https://github.com/ankith-mohan/SEP/blob/main/SDPs/UpperBounds/computebeta_kr.m)
 
 ## References
 1. Chen, J., Ji, Z., Kribs, D., Lütkenhaus, N., & Zeng, B. (2014). Symmetric extension of two-qubit states. Physical Review A, 90(3), 032318.

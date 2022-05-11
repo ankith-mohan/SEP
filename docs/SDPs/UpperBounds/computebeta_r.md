@@ -40,7 +40,7 @@ Computes the density matrix and the optimal value for the SDP involving the Real
         0.7304
 
 ## Source Code
-[Source](https://github.com/ankith-mohan/SEP/blob/main/helpers/computebeta_r.m)
+[Source](https://github.com/ankith-mohan/SEP/blob/main/SDPs/UpperBounds/computebeta_r.m)
 
 ## References
 1. Chen, K., & Wu, L. A. (2002). A matrix realignment method for recognizing entanglement. arXiv preprint quant-ph/0205017.

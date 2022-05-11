@@ -5,7 +5,7 @@
 %   [RHO_PPT, BETA_PPT] = computebeta_PPT(PI) computes the density matrix
 %   RHO_PPT and the optimal value of the SDP BETA_PPT
 %
-%   URL: https://ankith-mohan.github.io/SEP/helpers/computebeta_PPT.html
+%   URL: https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_PPT.html
 %
 %   requires: cvx (http://cvxr.com/cvx), PartialTranspose
 %   (http://www.qetlab.com/PartialTranspose), HSIP.m

@@ -9,7 +9,7 @@
 %   [RHO_K, BETA_K] = computebeta_k(PI, DIM_B, K, PPT) computes the density
 %   matrix RHO_K and the optimal value of the SDP BETA_K
 %
-%   URL: https://ankith-mohan.github.io/SEP/helpers/computebeta_k.html
+%   URL: https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_k.html
 %
 %   requires: cvx (http://cvxr.com/cvx/), SymmetricExtension (http://www.qetlab.com/SymmetricExtension), HSIP.m
 %   author: Ankith Mohan (ankithmo@vt.edu)

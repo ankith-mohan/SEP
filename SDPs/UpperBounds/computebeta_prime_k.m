@@ -11,7 +11,7 @@
 %   SDP BETA_PRIME_K
 %
 %   URL:
-%   https://ankith-mohan.github.io/SEP/helpers/computebeta_prime_k.html
+%   https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_prime_k.html
 %
 %   requires: cvx (http://cvxr.com/cvx), SymmetricExtension
 %   (http://www.qetlab.com/SymmetricExtension), HSIP.m
