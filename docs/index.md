@@ -1,5 +1,9 @@
 **SEP** is a MATLAB toolbox for computing bounds on the separability problem.
 
+## Installation
+
+## Tutorial
+
 ## List of functions
 ### Upper bounds
 These are the functions that correspond to relaxations of the separability set.
@@ -16,7 +20,20 @@ If [genOtimesHouseholder](/helpers/genOtimesHouseholder.md) is used to generate 
 - [computebeta_kr_sum](/SDPs/UpperBounds/sum/computebeta_kr_sum.md): Computes the density matrix and the optimal value for the SDP involving the Symmetric Extensions as well as the Realignment relaxations.
 - [computebeta_prime_k_sum](/SDPs/UpperBounds/sum/computebeta_prime_k_sum.md): Computes the density matrix and the optimal value for the SDP involving the Bosonic Extensions relaxation.
 - [computebeta_prime_kr_sum](/SDPs/UpperBounds/sum/computebeta_prime_kr_sum.md): Computes the density matrix and the optimal value for the SDP involving the Bosonic Extensions as well as the Realignment relaxations.
-- [computebeta_r_sum](/SDPs/UpperBounds/sum/computebeta_r_sum): Computes the density matrix and the optimal value for the SDP involving the Realignment relaxation.
+- [computebeta_r_sum](/SDPs/UpperBounds/sum/computebeta_r_sum.md): Computes the density matrix and the optimal value for the SDP involving the Realignment relaxation.
+
+### Lower bounds
+These functions compute the lower bound using the See-saw method.
+- [computegamma_part](/SDPs/LowerBounds/computegamma_part.md)
+- [computegamma_part_rev_1](/SDPs/LowerBounds/computegamma_part_rev_1.md)
+- [computegamma_part_rev_2](/SDPs/LowerBounds/computegamma_part_rev_2.md)
+- [computegamma_rand](/SDPs/LowerBounds/computegamma_rand.md)
+
+If [genOtimesHouseholder](/helpers/genOtimesHouseholder.md) is used to generate the cells of matrices then the following counterparts must be used.
+- [computegamma_part_sum](/SDPs/LowerBounds/computegamma_part_sum.md)
+- [computegamma_part_rev_1_sum](/SDPs/LowerBounds/computegamma_part_rev_1_sum.md)
+- [computegamma_part_rev_2_sum](/SDPs/LowerBounds/computegamma_part_rev_2_sum.md)
+- [computegamma_rand_sum](/SDPs/LowerBounds/computegamma_rand_sum.md)
 
 ### Helper functions
 These are functions that serve auxillary roles with SEP. As an end-user they might not be useful, but are listed anyway.
