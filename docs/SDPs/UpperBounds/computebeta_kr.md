@@ -45,3 +45,7 @@ Computes the density matrix and the optimal value for the SDP involving both the
 
 ## Source Code
 [Source](https://github.com/ankith-mohan/SEP/blob/main/helpers/computebeta_kr.m)
+
+## References
+1. Chen, J., Ji, Z., Kribs, D., Lütkenhaus, N., & Zeng, B. (2014). Symmetric extension of two-qubit states. Physical Review A, 90(3), 032318.
+2. Chen, K., & Wu, L. A. (2002). A matrix realignment method for recognizing entanglement. arXiv preprint quant-ph/0205017.

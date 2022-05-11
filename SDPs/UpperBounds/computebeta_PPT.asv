@@ -1,0 +1,25 @@
+%% COMPUTEBETA_PPT  Computes the density matrix and the optimal value of the SDP involving the PPT relaxation
+%   This function has one required input argument:
+%       PI: input matrix
+%
+%   [RHO_PPT, BETA_PPT] = computebeta_PPT(PI) computes the density matrix
+%   RHO_PPT and the optimal value of the SDP BETA_PPT
+%
+%   URL: https://ankith-mohan.github.io/SEP/helpers/computebeta_PPT.html
+%
+%   requires: cvx (http://cvxr.com/cvx), PartialTranspose
+%   (http://www.qetlab.com/PartialTranspose), HSIP.m
+%   author: Ankith Mohan (ankithmo@vt.edu)
+%   last u
+
+
+function [rho_PPT, beta_PPT] = computebeta_PPT(Pi)
+    cvx_begin sdp quiet
+        variable rho_PPT(size(Pi)) complex semidefinite;
+        maximize HSIP(rho_PPT, Pi)
+        subject to
+            trace(rho_PPT) == 1; % density matrix constraint
+            PartialTranspose(rho_PPT, 2) >= 0; % PPT criterion 
+    cvx_end
+    beta_PPT = HSIP(rho_PPT, Pi);
+end
