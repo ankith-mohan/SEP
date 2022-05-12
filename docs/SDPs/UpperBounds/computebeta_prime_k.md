@@ -1,5 +1,5 @@
 # computebeta_prime_k
-Computes the density matrix and the optimal value from the SDP involving the Bosonic Extensions relaxation
+Computes the density matrix and the optimal value for the SDP involving the Bosonic Extensions relaxation
 
 ## Syntax
 ``[RHO_PRIME_K, BETA_PRIME_K] = computebeta_prime_k(PI, DIM_B, K, PPT)``
