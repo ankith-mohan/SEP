@@ -1,8 +1,8 @@
 %% COMPUTEBETA_K_SUM    Computes the density matrix and the optimal value for the SDP involving the Symmetric Extensions relaxation
 %   The function has six required input arguments:
-%       K_list: cell of length N_SUMMANDS where each entry is a matrix of 
+%       K_LIST: cell of length N_SUMMANDS where each entry is a matrix of 
 %       size DIM_A x DIM_A
-%       L_list: cell of length N_SUMMANDS where each entry is a matrix of 
+%       L_LIST: cell of length N_SUMMANDS where each entry is a matrix of 
 %       size DIM_B x DIM_B
 %       N_SUMMANDS: number of matrices that have to be summed over
 %       DIM_B: integer that describes the dimension of the matrix for Bob
@@ -17,8 +17,9 @@
 %   URL:
 %   https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/sum/computebeta_k_sum.html
 %
-%   requires: cvx (http://cvxr.com/cvx/), SymmetricExtension
-%   (http://www.qetlab.com/SymmetricExtension), HSIP.m
+%   requires: cvx (http://cvxr.com/cvx/), Tensor (http://qetlab.com/Tensor), 
+%             SymmetricExtension (http://qetlab.com/SymmetricExtension), 
+%             HSIP.m
 %   author: Ankith Mohan (ankithmo@vt.edu)
 %   last updated: May 2, 2022
 

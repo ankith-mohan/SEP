@@ -14,7 +14,7 @@
 %   https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_prime_k.html
 %
 %   requires: cvx (http://cvxr.com/cvx), SymmetricExtension
-%   (http://www.qetlab.com/SymmetricExtension), HSIP.m
+%   (http://qetlab.com/SymmetricExtension), HSIP.m
 %   author: Ankith Mohan (ankithmo@vt.edu)
 %   last updated: May 2, 2022
 

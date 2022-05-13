@@ -8,7 +8,7 @@
 %   URL: https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_PPT.html
 %
 %   requires: cvx (http://cvxr.com/cvx), PartialTranspose
-%   (http://www.qetlab.com/PartialTranspose), HSIP.m
+%   (http://qetlab.com/PartialTranspose), HSIP.m
 %   author: Ankith Mohan (ankithmo@vt.edu)
 %   last updated: May 2, 2022
 

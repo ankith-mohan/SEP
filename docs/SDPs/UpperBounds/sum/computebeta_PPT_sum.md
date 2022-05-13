@@ -25,7 +25,14 @@ Computes the density matrix and the optimal value for the SDP involving the PPT 
 
     rho_PPT =
 
+        0.0064 + 0.0000i  -0.0084 + 0.0593i   0.0038 - 0.0042i   0.0338 + 0.0402i
+        -0.0084 - 0.0593i   0.5593 + 0.0000i  -0.0436 - 0.0292i   0.3272 - 0.3648i
+        0.0038 + 0.0042i  -0.0436 + 0.0292i   0.0049 + 0.0000i  -0.0064 + 0.0455i
+        0.0338 - 0.0402i   0.3272 + 0.3648i  -0.0064 - 0.0455i   0.4294 + 0.0000i
+
     beta_PPT =
+
+        0.8669
 
     >> genOtimesHouseholder("test_Pos.mat", 2, 2, 2, "Herm")
     >> load("test_Herm.mat", "K_list", "L_list")
@@ -33,7 +40,14 @@ Computes the density matrix and the optimal value for the SDP involving the PPT 
 
     rho_PPT =
 
+        0.0452 + 0.0000i  -0.1047 + 0.0835i   0.0479 + 0.0169i  -0.1421 + 0.0494i
+        -0.1047 - 0.0835i   0.3970 + 0.0000i  -0.0797 - 0.1276i   0.4205 + 0.1482i
+        0.0479 - 0.0169i  -0.0797 + 0.1276i   0.0570 + 0.0000i  -0.1321 + 0.1053i
+        -0.1421 - 0.0494i   0.4205 - 0.1482i  -0.1321 - 0.1053i   0.5008 + 0.0000i
+
     beta_PPT =
+
+        0.7142
 
 ## Source Code
 [Source](https://github.com/ankith-mohan/SEP/blob/main/SDPs/UpperBounds/sum/computebeta_PPT_sum.m)

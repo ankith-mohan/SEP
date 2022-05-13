@@ -14,24 +14,25 @@
 %   https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_prime_kr.html
 %
 %   requires: cvx (http://cvxr.com/cvx), SymmetricExtension
-%   (http://www.qetlab.com/SymmetricExtension), TraceNorm
-%   (http://www.qetlab.com/TraceNorm), Realignment
-%   (http://www.qetlab.com/Realignment), HSIP.m
+%   (http://qetlab.com/SymmetricExtension), TraceNorm
+%   (http://qetlab.com/TraceNorm), Realignment
+%   (http://qetlab.com/Realignment), HSIP.m
 %   author: Ankith Mohan (ankithmo@vt.edu)
 %   last updated: May 2, 2022
 
 
-function [rho_prime_kr, beta_prime_kr] = computebeta_prime_kr(Pi, dim_B, k, ...
-                                                            PPT)
+function [rho_prime_kr, beta_prime_kr] = computebeta_prime_kr(Pi, dim_B, ...
+                                                              k, PPT)
     cvx_begin sdp quiet
         variable rho_prime_kr(size(Pi)) complex semidefinite;
         maximize HSIP(rho_prime_kr, Pi)
         subject to
-            trace(rho_prime_kr) == 1; % density matrix
-            SymmetricExtension(rho_prime_kr, k, dim_B, PPT, 1, eps^(1/4)); 
+            % density matrix
+            trace(rho_prime_kr) == 1;
             % Bosonic symmetric extension constraint
-            TraceNorm(Realignment(rho_prime_kr)) <= 1; 
+            SymmetricExtension(rho_prime_kr, k, dim_B, PPT, 1, eps^(1/4)); 
             % realignment criterion
+            TraceNorm(Realignment(rho_prime_kr)) <= 1;
     cvx_end
     beta_prime_kr = HSIP(rho_prime_kr, Pi);
 end

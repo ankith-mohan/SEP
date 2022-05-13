@@ -7,7 +7,8 @@
 %
 %   URL: https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/computebeta_r.html
 %
-%   requires: cvx (http://cvxr.com/cvx), TraceNorm (http://www.qetlab.com/TraceNorm), Realignment (http://www.qetlab.com/Realignment), HSIP.m
+%   requires: cvx (http://cvxr.com/cvx), TraceNorm (http://qetlab.com/TraceNorm), 
+%             Realignment (http://qetlab.com/Realignment), HSIP.m
 %   author: Ankith Mohan (ankithmo@vt.edu)
 %   last updated: May 2, 2022
 
@@ -17,8 +18,10 @@ function [rho_r, beta_r] = computebeta_r(Pi)
         variable rho_r(size(Pi)) complex semidefinite;
         maximize HSIP(rho_r, Pi)
         subject to
-            trace(rho_r) == 1; % density matrix constraint
-            TraceNorm(Realignment(rho_r)) <= 1; % realignment constraint 
+            % density matrix constraint
+            trace(rho_r) == 1;
+            % realignment constraint 
+            TraceNorm(Realignment(rho_r)) <= 1;
     cvx_end
     beta_r = HSIP(rho_r, Pi);
 end

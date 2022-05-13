@@ -6,6 +6,23 @@
 %       size DIM_B x DIM_B
 %       N_SUMMANDS: number of matrices that have to be summed over
 %       DIM_B: integer that describes the dimension of the matrix for Bob
+%       K: integer that describes the number of symmetric extensions
+%       PPT: 1 to impose PPT criterion
+%            0 otherwise
+%
+%   [RHO_KR, BETA_KR] = computebeta_kr_sum(K_LIST, L_LIST, N_SUMMANDS,
+%   DIM_B, K, PPT) computes the density matrix RHO_KR and the optimal value of the SDP BETA_KR
+%
+%   URL:
+%   https://ankith-mohan.github.io/SEP/SDPs/UpperBounds/sum/computebeta_kr_sum.html
+%
+%   requires: cvx (http://cvxr.com/cvx/), Tensor
+%   (http://qetlab.com/Tensor), SymmetricExtension
+%   (http://qetlab.com/SymmetricExtension), TraceNorm
+%   (http://qetlab.com/TraceNorm), Realignment
+%   (http://qetlab.com/Realignment), HSIP.m
+%   author: Ankith Mohan (ankithmo@vt.edu)
+%   last updated: May 2, 2022
 
 
 function [rho_kr, beta_kr] = computebeta_kr_sum(K_list, L_list, N_summands, ...
@@ -21,10 +38,12 @@ function [rho_kr, beta_kr] = computebeta_kr_sum(K_list, L_list, N_summands, ...
         end
         maximize obj
         subject to
-            trace(rho_kr) == 1; % density matrix constraint
-            SymmetricExtension(rho_kr, k, dim_B, PPT, 0, eps^(1/4)); 
+            % density matrix constraint
+            trace(rho_kr) == 1;
             % Symmetric extension constraint
-            TraceNorm(Realignment(rho_kr)) <= 1; % realignment constraint
+            SymmetricExtension(rho_kr, k, dim_B, PPT, 0, eps^(1/4));
+            % realignment constraint
+            TraceNorm(Realignment(rho_kr)) <= 1;
     cvx_end
     beta_kr = 0;
     for j = 1:N_summands
