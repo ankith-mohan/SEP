@@ -1,5 +1,5 @@
 # genOtimesHouseholder
-Generates two cells comprising of a set of complex Hermitian or Positive Semidefinite matrices of the respective input dimensionalities
+Generates two cells comprising of a set of complex Hermitian or positive semidefinite matrices of the respective input dimensionalities
 
 ## Syntax
 ``genOtimesHouseholder(FILENAME, DIM_A, DIM_B, NUM_SUMMANDS, OPT)``
@@ -16,11 +16,37 @@ Generates two cells comprising of a set of complex Hermitian or Positive Semidef
     >> genOtimes("test.mat", 2, 2, 2, "Herm")
 
 ## Notes
-The intention behind this function is to construct our desired matrix $\Pi$ as 
+The intention behind this function is to construct our desired matrix $\Pi$ as
+{% raw %} 
 $$
     \Pi = \sum\limits_{i=1}^{NUM_SUMMANDS} K_i \otimes L_i
 $$
-where $\{K_i\}_{i=1}^{NUM\_SUMMANDS}$ is the set of $DIM\_A \times DIM\_A$ Hermitian or positive semidefinite matrices, and $\{L_i\}_{i=1}^{NUM\_SUMMANDS}$ is the set of $DIM\_B \times DIM\_B$ Hermitian or positive semidefinite matrices.
+{% endraw %}
+where
+{% raw %} 
+$
+    \{K_i\}_{i=1}^{NUM\_SUMMANDS}
+$
+{% endraw %} 
+is the set of
+{% raw %} 
+$
+    DIM\_A \times DIM\_A
+$
+{% endraw %}
+Hermitian or positive semidefinite matrices, and 
+{% raw %}
+$
+    \{L_i\}_{i=1}^{NUM\_SUMMANDS}
+$
+{% endraw %} 
+is the set of 
+{% raw %}
+$
+    DIM\_B \times DIM\_B
+$
+{% endraw %}
+Hermitian or positive semidefinite matrices.
 - ``FILENAME`` also contains the time required to generate each of the ``NUM_SUMMANDS`` matrices.
 
 ## Source Code
