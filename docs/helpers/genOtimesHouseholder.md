@@ -18,33 +18,23 @@ Generates two cells comprising of a set of complex Hermitian or positive semidef
 ## Notes
 The intention behind this function is to construct our desired matrix $\Pi$ as
 {% raw %} 
-$$
-    \Pi = \sum\limits_{i=1}^{NUM_SUMMANDS} K_i \otimes L_i
-$$
+$$\Pi = \sum\limits_{i=1}^{NUM_SUMMANDS} K_i \otimes L_i$$
 {% endraw %}
 where
 {% raw %} 
-$
-    \{K_i\}_{i=1}^{NUM\_SUMMANDS}
-$
+$\{K_i\}_{i=1}^{NUM\_SUMMANDS}$
 {% endraw %} 
 is the set of
 {% raw %} 
-$
-    DIM\_A \times DIM\_A
-$
+$DIM\_A \times DIM\_A$
 {% endraw %}
 Hermitian or positive semidefinite matrices, and 
 {% raw %}
-$
-    \{L_i\}_{i=1}^{NUM\_SUMMANDS}
-$
+$\{L_i\}_{i=1}^{NUM\_SUMMANDS}$
 {% endraw %} 
 is the set of 
 {% raw %}
-$
-    DIM\_B \times DIM\_B
-$
+$DIM\_B \times DIM\_B$
 {% endraw %}
 Hermitian or positive semidefinite matrices.
 - ``FILENAME`` also contains the time required to generate each of the ``NUM_SUMMANDS`` matrices.
