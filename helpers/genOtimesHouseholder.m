@@ -1,4 +1,4 @@
-%% GENOTIMESHOUSEHOLDER Generates two cells comprising of a set of complex Hermitian or Positive Semidefinite matrices of the respective input dimensionalities
+%%  GENOTIMESHOUSEHOLDER Generates two cells comprising of a set of complex Hermitian or positive semidefinite matrices of the respective input dimensionalities
 %   This function has five required input arguments:
 %       FILENAME: file location where the cells are stored
 %       DIM_A: integer that describes the dimension of the matrix for Alice
@@ -8,7 +8,7 @@
 %            "Herm" if Hermitian matrix is required
 %
 %   genOtimesHouseholder(FILENAME, DIM_A, DIM_B, NUM_SUMMANDS, OPT) saves
-%   NUM_SUMMANDS number of Hermitian or Positive Semidefinite matrices for
+%   NUM_SUMMANDS number of Hermitian or positive semidefinite matrices for
 %   Alice and Bob respectively in FILENAME
 %   Each matrix for Alice is of size DIM_A x DIM_A
 %   Each matrix for Bob is of size DIM_B x DIM_B

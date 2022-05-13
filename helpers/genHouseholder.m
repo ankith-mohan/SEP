@@ -1,15 +1,15 @@
-%%  GENHOUSEHOLDER  Generates a complex Hermitian or Positive Semidefinite matrix of the input dimensionality
+%%  GENHOUSEHOLDER  Generates a complex Hermitian or positive semidefinite matrix of the input dimensionality
 %   This function has two required arguments:
 %       DIM: integer that describes the local dimension of the matrix
 %       OPT: "Pos" if positive semidefinite matrix is required
 %            "Herm" if Hermitian matrix is required
 %
-%   M = genHouseholder(DIM, OPT) is a Hermitian or Positive Semidefinite
+%   M = genHouseholder(DIM, OPT) is a Hermitian or positive semidefinite
 %   matrix of size DIM x DIM
 %
 %   URL: https://ankith-mohan.github.io/SEP/helpers/genHouseholder.html
 %
-%   requires: IsPSD (http://www.qetlab.com/IsPSD)
+%   requires: IsPSD (http://qetlab.com/IsPSD)
 %   author: Ankith Mohan (ankithmo@vt.edu)
 %   last updated: May 2, 2022
 

@@ -1,8 +1,8 @@
-%% GENPOS   Generates a complex Positive Semidefinite matrix of the input dimensionality
+%% GENPOS   Generates a complex positive semidefinite matrix of the input dimensionality
 %   This function has one required input argument:
 %       DIM: integer that describes the local dimension of the matrix
 %
-%   P = genPos(DIM) is a Positive Semidefinite matrix of size DIM x DIM
+%   P = genPos(DIM) is a positive semidefinite matrix of size DIM x DIM
 %
 %   URL: https://ankith-mohan.github.io/SEP/helpers/genPos.html
 %

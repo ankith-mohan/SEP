@@ -1,12 +1,12 @@
-%% GENMAT Generates a complex Hermitian or Positive Semidefinite matrix of the input dimensionality normalized by its trace norm
+%% GENMAT Generates a complex Hermitian or positive semidefinite matrix of the input dimensionality normalized by its trace norm
 %   This function has three required input arguments:
 %       DIM: integer that describes the local dimension of the matrix
 %       OPT: "Pos" if positive semidefinite matrix is required
 %            "Herm" if Hermitian matrix is required
-%       PROJ: 1 to generate approximately projection matrix
-%             0 otherwise
+%       PROJ: 0 to use GENHOUSEHOLDER
+%             1 to use GENHERM if OPT == "Herm" or GENPOS if OPT == "Pos"
 %
-%   M = genMat(DIM, OPT, PROJ) is a Hermitian or Positive Semidefinite
+%   M = genMat(DIM, OPT, PROJ) is a Hermitian or positive semidefinite
 %   matrix of size DIM x DIM
 %
 %   URL: https://ankith-mohan.github.io/SEP/helpers/genMat.html
