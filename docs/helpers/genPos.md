@@ -1,5 +1,5 @@
 # genPos
-Generates a complex Positive Semidefinite matrix of the input dimensionality
+Generates a complex positive semidefinite matrix of the input dimensionality
 
 ## Syntax
 ``H = genPos(DIM)``

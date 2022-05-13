@@ -1,5 +1,5 @@
 # genMat
-Generates a complex Hermitian or Positive Semidefinite matrix of the input dimensionality normalized by its trace norm
+Generates a complex Hermitian or positive semidefinite matrix of the input dimensionality normalized by its trace norm
 
 ## Syntax
 ``M = genMat(DIM, OPT, PROJ)``
@@ -8,8 +8,8 @@ Generates a complex Hermitian or Positive Semidefinite matrix of the input dimen
 ``DIM``: integer that describes the local dimension of the matrix.
 ``OPT``: ``"Pos"`` if positive semidefinite matrix is required
        ``"Herm"`` if Hermitian matrix is required
-``PROJ``: 1 to generate an approximately projection matrix
-          0 otherwise
+``PROJ``: 0 to use ``genHouseholder``
+          1 to use ``genHerm`` if ``OPT == "Herm"`` or ``genPos`` if ``OPT == "Pos"``
 
 ## Example
     >> genMat(2, "Pos", 0)

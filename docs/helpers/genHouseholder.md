@@ -1,5 +1,5 @@
 # genHouseholder
-Generates a complex Hermitian or Positive Semidefinite matrix of the input dimensionality
+Generates a complex Hermitian or positive semidefinite matrix of the input dimensionality
 
 ## Syntax
 ``H = genHouseholder(DIM, OPT)``
@@ -29,7 +29,7 @@ This function does the following:
 1. The spectrum is ``DIM`` numbers sampled uniformly in the range: [0, 1] if ``OPT`` is ``"Pos"``, [-1, 1] if ``OPT`` is ``"Herm"``
 2. This spectrum forms the diagonal entries of the matrix ``Lambda``
 3. Creates a random complex matrix ``M``
-4. Orthogonal ``M`` to get the matrix ``Q``
+4. Householder reflections on ``M`` to obtain the orthogonal matrix ``Q``
 5. ``M = Q * Lambda * Q``
 6. ``M = 0.5 * (M + M')`` to make ``M`` Hermitian
 7. ``M = M' * M`` if ``OPT`` is ``"Pos"``
