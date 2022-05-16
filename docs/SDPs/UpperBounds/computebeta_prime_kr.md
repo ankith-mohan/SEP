@@ -17,7 +17,7 @@ Computes the density matrix and the optimal value for the SDP involving the Boso
 - ``BETA_PRIME_KR``: optimal value of the Bosonic Extensions with Realignment SDP
 
 ## Example
-    >> [rho_prime_kr, beta_prime_kr] = computebeta_prime_kr(genMat(4, "Herm", 0), 4, 2, 1)
+    >> [rho_prime_kr, beta_prime_kr] = computebeta_prime_kr(genMat(4, "Herm", 0), 2, 2, 1)
 
     rho_prime_kr =
 
@@ -30,7 +30,7 @@ Computes the density matrix and the optimal value for the SDP involving the Boso
 
         0.8833
 
-    >> [rho_prime_kr, beta_prime_kr] = computebeta_prime_kr(genMat(4, "Pos", 0), 4, 2, 1)
+    >> [rho_prime_kr, beta_prime_kr] = computebeta_prime_kr(genMat(4, "Pos", 0), 2, 2, 1)
 
     rho_prime_kr =
 

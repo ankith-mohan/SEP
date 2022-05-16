@@ -1,3 +1,27 @@
+%%  COMPUTEGAMMA_PART_REV_1 Computes the density matrix of the respective subsystems, optimal value and the number of iterations for revision 1 of the see-saw algorithm
+%   This function has six required input arguments:
+%       PI: input matrix
+%       SIGMA: Starting matrix for the see-saw algorithm
+%       DIM: dimension of the starting matrix
+%       THRESHOLD: threshold to determine convergence
+%       N_SEESAW: maximum number of see-saw steps
+%       OPT: "sigma_A" if starting matrix is for Alice's subsystem
+%            "sigma_B" if starting matrix is for Bob's subsystem
+%
+%   [SIGMA_A, SIGMA_B, GAMMA, I] = computegamma_part_rev_1(PI, SIGMA, DIM,
+%   THRESHOLD, N_SEESAW, OPT) computes the density matrix of the
+%   respective subsystems SIGMA_A and SIGMA_B, the optimal value GAMMA, and
+%   the number of see-saw steps before convergence I
+%
+%   URL:
+%   https://ankith-mohan.github.io/SEP/SDPs/LowerBounds/computegamma_part_rev_1.html
+%
+%   requires: cvx (http://cvxr.com/cvx), PartialTrace (http://qetlab.com/PartialTrace), 
+%   Tensor (http://qetlab.com/Tensor), HSIP.m
+%   author: Ankith Mohan (ankithmo@vt.edu)
+%   last updated: May 2, 2022
+
+
 function [sigma_A, sigma_B, gamma, i] = computegamma_part_rev_1(Pi, ...
                                             sigma, dim, threshold, ...
                                             N_seeSaw, opt)
@@ -24,7 +48,7 @@ function [sigma_A, sigma_B, gamma, i] = computegamma_part_rev_1(Pi, ...
             C_B = PartialTrace(Tensor(sigma_A, eye(dim_B)) * Pi, 1);
             cvx_begin sdp quiet
                 variable sigma_B(dim_B, dim_B) complex semidefinite;
-                maximize HSIP(C_B, sigma_B_part)
+                maximize HSIP(C_B, sigma_B)
                 subject to
                     trace(sigma_B) == 1; % density matrix constraint
             cvx_end

@@ -13,7 +13,7 @@ Generates two cells comprising of a set of complex Hermitian or positive semidef
        ``"Herm"`` if Hermitian matrix is required
 
 ## Example
-    >> genOtimes("test.mat", 2, 2, 2, "Herm")
+    >> genOtimesHouseholder("test.mat", 2, 2, 2, "Herm")
 
 ## Notes
 The intention behind this function is to construct our desired matrix $$\Pi$$ as $$\Pi = \sum\limits_{i=1}^{NUM_SUMMANDS} K_i \otimes L_i$$ where $$\{K_i\}_{i=1}^{NUM\_SUMMANDS}$$ is the set of $$DIM\_A \times DIM\_A$$ Hermitian or positive semidefinite matrices, and $$\{L_i\}_{i=1}^{NUM\_SUMMANDS}$$ is the set of $$DIM\_B \times DIM\_B$$ Hermitian or positive semidefinite matrices.

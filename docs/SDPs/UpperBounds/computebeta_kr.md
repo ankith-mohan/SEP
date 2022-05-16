@@ -17,7 +17,7 @@ Computes the density matrix and the optimal value for the SDP involving both the
 - ``BETA_KR``: optimal values of the Symmetric Extensions with Realignment SDP
 
 ## Example
-    >> [rho_kr, beta_kr] = computebeta_kr(genMat(4, "Herm", 0), 4, 2, 1)
+    >> [rho_kr, beta_kr] = computebeta_kr(genMat(4, "Herm", 0), 2, 2, 1)
 
     rho_kr =
 
@@ -30,7 +30,7 @@ Computes the density matrix and the optimal value for the SDP involving both the
 
         0.6325
 
-    >> [rho_kr, beta_kr] = computebeta_kr(genMat(4, "Pos", 0), 4, 2, 1)
+    >> [rho_kr, beta_kr] = computebeta_kr(genMat(4, "Pos", 0), 2, 2, 1)
 
     rho_kr =
 
