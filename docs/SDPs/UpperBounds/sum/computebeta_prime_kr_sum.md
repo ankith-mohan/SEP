@@ -11,12 +11,13 @@ Computes the density matrix and the optimal value for the SDP involving the Boso
 - ``N_SUMMANDS``: number of matrices that have to be summed over
 - ``DIM_B``: integer that describes the dimension of the matrix for Bob
 - ``K``: integer that describes the number of symmetric extensions
-- ``PPT``: 1 to impose PPT criterion
-           0 otherwise
+- ``PPT``: 
+    - 1 to impose PPT criterion
+    - 0 otherwise
 
 #### Output arguments
-- ``RHO_PRIME_KR``: density matrix of the Symmetric Extensions and Realignment SDP
-- ``BETA_PRIME_KR``: optimal value of the Symmetric Extensions and Realignment SDP
+- ``RHO_PRIME_KR``: density matrix of the Bosonic Extensions and Realignment SDP
+- ``BETA_PRIME_KR``: optimal value of the Bosonic Extensions and Realignment SDP
 
 ## Example
     >> genOtimesHouseholder("test_Herm.mat", 2, 2, 2, "Herm")

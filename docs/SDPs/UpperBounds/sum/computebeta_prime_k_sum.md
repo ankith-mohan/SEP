@@ -10,8 +10,9 @@ Computes the density matrix and the optimal value for the SDP involving the Boso
 - ``L_LIST``: cell of length ``N_SUMMANDS`` where each entry is a matrix of size ``DIM_B x DIM_B``
 - ``N_SUMMANDS``: number of matrices that have to be summed over
 - ``DIM_B``: integer that describes the dimension of the matrix for Bob
-- ``PPT``: 1 to impose PPT criterion
-           0 otherwise
+- ``PPT``: 
+    - 1 to impose PPT criterion
+    - 0 otherwise
 
 #### Output arguments
 - ``RHO_PRIME_K``: density matrix of the Bosonic Extensions SDP

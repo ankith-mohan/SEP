@@ -13,8 +13,9 @@
 %       SS_TYPE: "simple" if COMPUTEGAMMA_PART
 %                "rev_1" if COMPUTEGAMMA_PART_REV_1
 %                "rev_2" if COMPUTEGAMMA_PART_REV_2
-%       PLUS_TWO: if both the maximally mixed state and the state of
+%       PLUS_TWO: 2 if both the maximally mixed state and the state of
 %       uniform superposition must be added to the list of starting points
+%                 0 otherwise
 %
 %   [SIGMA_A_RAND_BEST, SIGMA_B_RAND_BEST, GAMMA_RAND_BEST, I_BEST, 
 %   GAMMA_RAND_LIST] = computegamma_rand(K_LIST, L_LIST, N_SUMMANDS, DIM_A, 

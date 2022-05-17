@@ -69,4 +69,4 @@ Computes the density matrix of the respective subsystems, the optimal value and 
         4
 
 ## Source Code
-[Source](https://github.com/ankith-mohan/SEP/blob/main/SDPs/LowerBounds/computegamma_part_rev_1_sum.m)
+[Source](https://github.com/ankith-mohan/SEP/blob/main/SDPs/LowerBounds/sum/computegamma_part_rev_1_sum.m)

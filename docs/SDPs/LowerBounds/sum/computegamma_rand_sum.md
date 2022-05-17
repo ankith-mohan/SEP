@@ -14,11 +14,13 @@ Computes the density matrix of the respective subsystems, largest of the optimal
 - ``THRESHOLD``: threshold to determine convergence
 - ``N_SEESAW``: maximum number of see-saw steps
 - ``N_RAND``: number of random starting points
-- ``SS_TYPE``: ``"simple"`` if ``COMPUTEGAMMA_PART``
-               ``"rev_1"`` if ``COMPUTEGAMMA_PART_REV_1``
-               ``"rev_2"`` if ``COMPUTEGAMMA_PART_REV_2``
-- ``PLUS_TWO``: 2 if both the maximally mixed state and the state of uniform superposition must be added to the list of starting points
-                0 otherwise
+- ``SS_TYPE``: 
+    - ``"simple"`` if ``COMPUTEGAMMA_PART``
+    - ``"rev_1"`` if ``COMPUTEGAMMA_PART_REV_1``
+    - ``"rev_2"`` if ``COMPUTEGAMMA_PART_REV_2``
+- ``PLUS_TWO``: 
+    - 2 if both the maximally mixed state and the state of uniform superposition must be added to the list of starting points
+    - 0 otherwise
 
 #### Output arguments
 - ``SIGMA_A_RAND_BEST``: density matrix for Alice's subsystem
@@ -50,7 +52,7 @@ Computes the density matrix of the respective subsystems, largest of the optimal
 
         7
 
-    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "rev_1", 2)
+    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand_sum(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "rev_1", 2)
 
     sigma_A_rand_best =
 
@@ -70,7 +72,7 @@ Computes the density matrix of the respective subsystems, largest of the optimal
 
         7
 
-    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "rev_2", 2)
+    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand_sum(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "rev_2", 2)
 
     sigma_A_rand_best =
 
@@ -92,7 +94,7 @@ Computes the density matrix of the respective subsystems, largest of the optimal
 
     >> genOtimesHouseholder("test_Pos.mat", 2, 2, 2, "Pos")
     >> load("test_Pos.mat", "K_list", "L_list")
-    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "simple", 2)
+    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand_sum(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "simple", 2)
 
     sigma_A_rand_best =
 
@@ -114,7 +116,7 @@ Computes the density matrix of the respective subsystems, largest of the optimal
 
     >> genOtimesHouseholder("test_Pos.mat", 2, 2, 2, "Pos")
     >> load("test_Pos.mat", "K_list", "L_list")
-    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "rev_1", 2)
+    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand_sum(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "rev_1", 2)
 
     sigma_A_rand_best =
 
@@ -136,7 +138,7 @@ Computes the density matrix of the respective subsystems, largest of the optimal
 
     >> genOtimesHouseholder("test_Pos.mat", 2, 2, 2, "Pos")
     >> load("test_Pos.mat", "K_list", "L_list")
-    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "rev_2", 2)
+    >> [sigma_A_rand_best, sigma_B_rand_best, gamma_rand_best, i_best, ~] = computegamma_rand_sum(K_list, L_list, 2, 2, 2, 1e-13, 100, 100, "rev_2", 2)
 
     sigma_A_rand_best =
 
@@ -157,4 +159,4 @@ Computes the density matrix of the respective subsystems, largest of the optimal
         4
 
 ## Source Code
-[Source](https://github.com/ankith-mohan/SEP/blob/main/SDPs/LowerBounds/computegamma_rand_sum.m)
+[Source](https://github.com/ankith-mohan/SEP/blob/main/SDPs/LowerBounds/sum/computegamma_rand_sum.m)

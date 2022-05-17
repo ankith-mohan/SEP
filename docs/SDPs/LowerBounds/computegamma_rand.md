@@ -12,11 +12,13 @@ Computes the density matrix of the respective subsystems, largest of the optimal
 - ``THRESHOLD``: threshold to determine convergence
 - ``N_SEESAW``: maximum number of see-saw steps
 - ``N_RAND``: number of random starting points
-- ``SS_TYPE``: ``"simple"`` if ``COMPUTEGAMMA_PART``
-               ``"rev_1"`` if ``COMPUTEGAMMA_PART_REV_1``
-               ``"rev_2"`` if ``COMPUTEGAMMA_PART_REV_2``
-- ``PLUS_TWO``: 2 if both the maximally mixed state and the state of uniform superposition must be added to the list of starting points
-                0 otherwise
+- ``SS_TYPE``: 
+    - ``"simple"`` if ``COMPUTEGAMMA_PART``
+    - ``"rev_1"`` if ``COMPUTEGAMMA_PART_REV_1``
+    - ``"rev_2"`` if ``COMPUTEGAMMA_PART_REV_2``
+- ``PLUS_TWO``: 
+    - 2 if both the maximally mixed state and the state of uniform superposition must be added to the list of starting points
+    - 0 otherwise
 
 #### Output arguments
 - ``SIGMA_A_RAND_BEST``: density matrix for Alice's subsystem

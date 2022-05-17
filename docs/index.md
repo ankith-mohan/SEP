@@ -7,7 +7,9 @@
 
 ## [List of functions](funcs.md)
 
-## Getting started: Two introdutory examples
+## Getting started: Two introductory examples
+To compute upper and lower bounds over several instances, please refer [executeExpt](/main/executeExpt.md).
+
 The first example will cover the generation of a 4 x 4 positive semidefinite matrix and computing the upper and lower bounds on this matrix.
 
     >> P = genMat(4, "Pos", 0)

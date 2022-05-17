@@ -6,10 +6,12 @@ Generates a complex Hermitian or positive semidefinite matrix of the input dimen
 
 ## Argument description
 - ``DIM``: integer that describes the local dimension of the matrix.
-- ``OPT``: ``"Pos"`` if positive semidefinite matrix is required
-           ``"Herm"`` if Hermitian matrix is required
-- ``PROJ``: 0 to use ``genHouseholder``
-            1 to use ``genHerm`` if ``OPT == "Herm"`` or ``genPos`` if ``OPT == "Pos"``
+- ``OPT``: 
+    - ``"Pos"`` if positive semidefinite matrix is required
+    - ``"Herm"`` if Hermitian matrix is required
+- ``PROJ``: 
+    - 0 to use ``genHouseholder``
+    - 1 to use ``genHerm`` if ``OPT == "Herm"`` or ``genPos`` if ``OPT == "Pos"``
 
 ## Example
     >> genMat(2, "Pos", 0)

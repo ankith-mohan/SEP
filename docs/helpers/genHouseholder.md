@@ -6,8 +6,9 @@ Generates a complex Hermitian or positive semidefinite matrix of the input dimen
 
 ## Argument description
 - ``DIM``: integer that describes the local dimension of the matrix.
-- ``OPT``: ``"Pos"`` if positive semidefinite matrix is required
-       ``"Herm"`` if Hermitian matrix is required
+- ``OPT``: 
+    - ``"Pos"`` if positive semidefinite matrix is required
+    - ``"Herm"`` if Hermitian matrix is required
 
 ## Example
     >> genHouseholder(2, "Pos")

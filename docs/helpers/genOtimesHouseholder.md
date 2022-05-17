@@ -9,8 +9,9 @@ Generates two cells comprising of a set of complex Hermitian or positive semidef
 - ``DIM_A``: integer that describes the dimension of the matrix for Alice.
 - ``DIM_B``: integer that describes the dimension of the matrix for Bob.
 - ``NUM_SUMMANDS``: number of matrices for Alice and Bob each
-- ``OPT``: ``"Pos"`` if positive semidefinite matrix is required
-       ``"Herm"`` if Hermitian matrix is required
+- ``OPT``: 
+    - ``"Pos"`` if positive semidefinite matrix is required
+    - ``"Herm"`` if Hermitian matrix is required
 
 ## Example
     >> genOtimesHouseholder("test.mat", 2, 2, 2, "Herm")
