@@ -1,3 +1,102 @@
+%%  SETUPEXPT   Computes the upper and lower bounds for N_OPS instances
+%   This function has sixteen required input arguments:
+%       DIM_A: integer that describes the dimension of the matrix for Alice
+%       DIM_B: integer that describes the dimension of the matrix for Bob
+%       K_SE: integer that describes the maximum number of symmetric extensions
+%       K_BSE: integer that describes the maximum number of bosonic
+%       extensions
+%       N_SEESAW: maximum number of see-saw steps
+%       N_RAND: number of random starting points
+%       SUM: 1 if GENOTIMESHOUSEHOLDER is used to generate the cells of
+%       matrices
+%            0 otherwise
+%       NUM_SUMMANDS: number of matrices that have to be summed over
+%       N_OPS: number of instances of the input matrix to compute the
+%       bounds for
+%       THRESHOLD: threshold to determine convergence
+%       OPT: "sigma_A" if starting matrix is for Alice's subsystem
+%            "sigma_B" is starting matrix if for Bob's subsystem
+%       FILENAME: ".mat" file where all the results have to written
+%       PROJ: 0 to use GENHOUSEHOLDER
+%             1 to use GENHERM if OPT == "Herm"
+%                      GENPOS if OPT == "Pos"
+%       DONT_DO: list that contains what functions must NOT be called
+%                Upper bounds:
+%                "PPT": computebeta_PPT if SUM == 0 else compute_PPT_sum
+%                "realignment": computebeta_r if SUM == 0 else
+%                computebeta_r_sum
+%
+%                Symmetric Extensions:
+%                "SymExtOnly": computebeta_k(PPT=0) if SUM == 0 else
+%                computebeta_k_sum(PPT=0)
+%                "SymExtOnlyrlg": computebeta_kr(PPT=0) if SUM == 0 else
+%                computebeta_kr_sum(PPT=0)
+%                "SymExt": computebeta_k(PPT=1) if SUM == 0 else
+%                computebeta_k_sum(PPT=1)
+%                "SymExtrlg": computebeta_kr(PPT=1) if SUM == 0 else
+%                computebeta_kr_sum(PPT=1)
+%               
+%                Bosonic Extensions:
+%                "BosSymExtOnly": computebeta_prime_k(PPT=0) if SUM == 0
+%                else computebeta_prime_k_sum(PPT=0)
+%                "BosSymExtOnlyrlg": computebeta_prime_kr(PPT=0) if SUM ==
+%                0 else computebeta_prime_kr_sum(PPT=0)
+%                "BosSymExt": computebeta_prime_k(PPT=1) if SUM == 0 else
+%                computebeta_prime_k_sum(PPT=1)
+%                "BosSymExtrlg": computebeta_prime_kr(PPT=1) if SUM == 0
+%                else computebeta_prime_kr_sum(PPT=1)
+%
+%                Lower bounds:
+%                Maximally mixed state:
+%                "MM_simple": computegamma_part(SIGMA=eye(dim_A)/dim_A) if
+%                SUM == 0 else computegamma_part_sum(SIGMA=eye(dim_A)/dim_A)
+%                "MM_rev_1": computegamma_part_rev_1(SIGMA=eye(dim_A)/dim_A) if
+%                SUM == 0 else computegamma_part_rev_1_sum(SIGMA=eye(dim_A)/dim_A)
+%                "MM_rev_2": computegamma_part_rev_2(SIGMA=eye(dim_A)/dim_A) if
+%                SUM == 0 else computegamma_part_rev_2_sum(SIGMA=eye(dim_A)/dim_A)
+%
+%                State of uniform superposition:
+%                "US_simple": computegamma_part(SIGMA=ones(dim_A)/dim_A) if
+%                SUM == 0 else computegamma_part_sum(SIGMA=ones(dim_A)/dim_A)
+%                "US_rev_1": computegamma_part_rev_1(SIGMA=ones(dim_A)/dim_A) if
+%                SUM == 0 else computegamma_part_rev_1_sum(SIGMA=ones(dim_A)/dim_A)
+%                "US_rev_2": computegamma_part_rev_2(SIGMA=ones(dim_A)/dim_A) if
+%                SUM == 0 else computegamma_part_rev_2_sum(SIGMA=ones(dim_A)/dim_A)
+%
+%                Random starting points:
+%                "rand_simple": computegamma_rand(SS_TYPE="simple") if SUM 
+%                == 0 else computegamma_rand_sum(SS_TYPE="simple")
+%                "rand_rev_1": computegamma_rand(SS_TYPE="rev_1") if SUM ==
+%                0 else computegamma_rand_sum(SS_TYPE="rev_1")
+%                "rand_rev_2": computegamma_rand(SS_TYPE="rev_2") if SUM ==
+%                0 else computegamma_rand_sum(SS_TYPE="rev_2")
+%
+%       SHOULD_SAVE: 1 if the density matrices returned by each of the
+%       functions need to be stored in FILENAME
+%                    0 otherwise
+%       PLUS_TWO_RAND: 2 if both the maximally mixed state and the state of
+%       uniform superposition must be added to the list of starting points
+%                      0 otherwise
+%
+%   setupExpt(DIM_A, DIM_B, K_SE, K_BSE, N_SEESAW, N_RAND, SUM, NUM_SUMMANDS, 
+%   N_OPS, THRESHOLD, OPT, FILENAME, PROJ, DONT_DO, SHOULD_SAVE, PLUS_TWO_RAND)
+%   writes the computed values in FILENAME.mat
+%   
+%   URL: https://ankith-mohan.github.io/SEP/main/setupExpt.html
+%
+%   requires: genOtimesHouseholder.m, genMat.m, computebeta_PPT.m,
+%   computebeta_PPT_sum.m, computebeta_r.m, computebeta_r_sum.m,
+%   computebeta_k.m, computebeta_k_sum.m, computebeta_kr.m,
+%   computebeta_kr_sum.m, computebeta_prime_k.m, computebeta_prime_k_sum.m,
+%   computebeta_prime_kr.m, computebeta_prime_kr_sum.m,
+%   computegamma_part.m, computegamma_part_sum.m,
+%   computegamma_part_rev_1.m, computegamma_part_rev_1_sum.m,
+%   computegamma_part_rev_2.m, computegamma_part_rev_2_sum.m,
+%   computegamma_rand.m, computegamma_rand_sum.m
+%   author: Ankith Mohan (ankithmo@vt.edu)
+%   last updated: May 2, 2022
+
+
 function setupExpt(dim_A, dim_B, K_se, K_bse, N_seeSaw, N_rand, ...
                    sum, num_summands, N_ops, threshold, opt, filename, ...
                    proj, dont_do, should_save, plus_two_rand)
@@ -148,133 +247,6 @@ function setupExpt(dim_A, dim_B, K_se, K_bse, N_seeSaw, N_rand, ...
         end
         beta_prime_kr = zeros(K_se, N_ops);
         beta_prime_kr_time = zeros(K_se, N_ops);
-    end
-    
-    %% Square root
-    % simple see-saw from sigma_A
-    if any(ismember('beta_sqrt', var_list))
-        load(filename, 'beta_sqrt', 'gamma_sqrt', 'gamma_sqrt_stop', ...
-                'sqrt_time');
-    elseif ~any(ismember('sqrt_simple_A', dont_do))
-        if should_save == 1
-            sigma_A = cell(1, N_ops);
-            sigma_B = cell(1, N_ops);
-        end
-        beta_sqrt = zeros(1, N_ops);
-        
-        if should_save == 1
-            sigma_A_sqrt = cell(1, N_ops);
-            sigma_B_sqrt = cell(1, N_ops);
-        end
-        gamma_sqrt = zeros(1, N_ops);
-        
-        gamma_sqrt_stop = zeros(1, N_ops);
-        sqrt_time = zeros(1, N_ops);
-    end
-    
-    % simple see-saw from sigma_B
-    if any(ismember('beta_sqrt_B', var_list))
-        load(filename, 'beta_sqrt_B', 'gamma_sqrt_B', ...
-                'gamma_sqrt_stop_B', 'sqrt_time_B');
-    elseif ~any(ismember('sqrt_simple_B', dont_do))
-        if should_save == 1
-            sigma_A_start_B = cell(1, N_ops);
-            sigma_B_start_B = cell(1, N_ops);
-        end
-        beta_sqrt_B = zeros(1, N_ops);
-        
-        if should_save == 1
-            sigma_A_sqrt_B = cell(1, N_ops);
-            sigma_B_sqrt_B = cell(1, N_ops);
-        end
-        gamma_sqrt_B = zeros(1, N_ops);
-        
-        gamma_sqrt_stop_B = zeros(1, N_ops);
-        sqrt_time_B = zeros(1, N_ops);
-    end
-    
-    % revised 1 see-saw from sigma_A
-    if any(ismember('beta_sqrt_rev_1', var_list))
-        load(filename, 'beta_sqrt_rev_1', 'gamma_sqrt_rev_1', ...
-                'gamma_sqrt_stop_rev_1', 'sqrt_time_rev_1');
-    elseif ~any(ismember('sqrt_rev_1_A', dont_do))
-        if should_save == 1
-            sigma_A_rev_1 = cell(1, N_ops);
-            sigma_B_rev_1 = cell(1, N_ops);
-        end
-        beta_sqrt_rev_1 = zeros(1, N_ops);
-        
-        if should_save == 1
-            sigma_A_sqrt_rev_1 = cell(1, N_ops);
-            sigma_B_sqrt_rev_1 = cell(1, N_ops);
-        end
-        gamma_sqrt_rev_1 = zeros(1, N_ops);
-        
-        gamma_sqrt_stop_rev_1 = zeros(1, N_ops);
-        sqrt_time_rev_1 = zeros(1, N_ops);
-    end
-    
-    % revised 1 see-saw from sigma_B
-    if any(ismember('beta_sqrt_rev_1_B', var_list))
-        load(filename, 'beta_sqrt_rev_1_B', 'gamma_sqrt_rev_1_B', ...
-                'gamma_sqrt_stop_rev_1_B', 'sqrt_time_rev_1_B');
-    elseif ~any(ismember('sqrt_rev_1_B', dont_do))
-        if should_save == 1
-            sigma_A_rev_1_B = cell(1, N_ops);
-            sigma_B_rev_1_B = cell(1, N_ops);
-        end
-        beta_sqrt_rev_1_B = zeros(1, N_ops);
-        
-        if should_save == 1
-            sigma_A_sqrt_rev_1_B = cell(1, N_ops);
-            sigma_B_sqrt_rev_1_B = cell(1, N_ops);
-        end
-        gamma_sqrt_rev_1_B = zeros(1, N_ops);
-        
-        gamma_sqrt_stop_rev_1_B = zeros(1, N_ops);
-        sqrt_time_rev_1_B = zeros(1, N_ops);
-    end
-    
-    % revised 2 see-saw from sigma_A
-    if any(ismember('beta_sqrt_rev_2', var_list))
-        load(filename, 'beta_sqrt_rev_2', 'gamma_sqrt_rev_2', ...
-                'gamma_sqrt_stop_rev_2', 'sqrt_time_rev_2');
-    elseif ~any(ismember('sqrt_rev_2_A', dont_do))
-        if should_save == 1
-            sigma_A_rev_2 = cell(1, N_ops);
-            sigma_B_rev_2 = cell(1, N_ops);
-        end
-        beta_sqrt_rev_2 = zeros(1, N_ops);
-        
-        if should_save == 1
-            sigma_A_sqrt_rev_2 = cell(1, N_ops);
-            sigma_B_sqrt_rev_2 = cell(1, N_ops);
-        end
-        gamma_sqrt_rev_2 = zeros(1, N_ops);
-        
-        gamma_sqrt_stop_rev_2 = zeros(1, N_ops);
-        sqrt_time_rev_2 = zeros(1, N_ops);
-    end
-    
-    % revised 2 see-saw from sigma_B
-    if any(ismember('beta_sqrt_rev_2_B', var_list))
-        load(filename, 'beta_sqrt_rev_2_B', 'gamma_sqrt_rev_2_B', ...
-                'gamma_sqrt_stop_rev_2_B', 'sqrt_time_rev_2_B');
-    elseif ~any(ismember('sqrt_rev_2_B', dont_do))
-        if should_save == 1
-            sigma_A_rev_2_B = cell(1, N_ops);
-            sigma_B_rev_2_B = cell(1, N_ops);
-        end
-        beta_sqrt_rev_2_B = zeros(1, N_ops);
-        
-        if should_save == 1
-            sigma_A_sqrt_rev_2_B = cell(1, N_ops);
-            sigma_B_sqrt_rev_2_B = cell(1, N_ops);
-        end
-        gamma_sqrt_rev_2_B = zeros(1, N_ops);
-        
-        gamma_sqrt_stop_rev_2_B = zeros(1, N_ops);
-        sqrt_time_rev_2_B = zeros(1, N_ops);
     end
     
     %% Maximally mixed state
@@ -671,209 +643,6 @@ sprintf("Instance %d: Bosonic Symmetric Extensions PPT (no realignment)", ...
             end
         end
 
-        %% sqrt: Square root
-        % beta_sqrt: Upper bound
-        % gamma_sqrt: Lower bound
-        
-        % simple see-saw from sigma_A
-        if ~any(ismember('sqrt_simple_A', dont_do))
-            waitbar(n/N_ops, h, ...
-     sprintf("Instance %d: Square root (simple see-saw from sigma_A)", n));
-            sqrt_start = tic;
-            if sum == 1
-                [sigma_A_n, sigma_B_n, beta_sqrt(n), sigma_A_sqrt_n, ...
-                    sigma_B_sqrt_n, gamma_sqrt(n), ...
-                    gamma_sqrt_stop(n)] = computesqrt_sum(K_list, L_list, ...
-                                        num_summands, dim_A, dim_B, ...
-                                        threshold, N_seeSaw, "sigma_A", ...
-                                        "simple");
-            else
-            [sigma_A_n, sigma_B_n, beta_sqrt(n), sigma_A_sqrt_n, ...
-                sigma_B_sqrt_n, gamma_sqrt(n), ...
-                gamma_sqrt_stop(n)] = computesqrt(Pi, dim_A, dim_B, ...
-                                                    threshold, N_seeSaw, ...
-                                                    "sigma_A", "simple");
-            end
-            if should_save == 1
-                sigma_A{n} = sigma_A_n;
-                sigma_B{n} = sigma_B_n;
-                sigma_A_sqrt{n} = sigma_A_sqrt_n;
-                sigma_B_sqrt{n} = sigma_B_sqrt_n;
-            end
-            sqrt_time(n) = toc(sqrt_start);
-            clear sigma_A_n sigma_B_n sigma_A_sqrt_n sigma_B_sqrt_n ...
-                sqrt_start;
-        end
-        
-        % simple see-saw from sigma_B
-        if ~any(ismember('sqrt_simple_B', dont_do))
-            waitbar(n/N_ops, h, ...
-     sprintf("Instance %d: Square root (simple see-saw from sigma_B)", n));
-            sqrt_start_B = tic;
-            if sum == 1
-                [sigma_A_start_B_n, sigma_B_start_B_n, beta_sqrt_B(n), ...
-                    sigma_A_sqrt_B_n, sigma_B_sqrt_B_n, gamma_sqrt_B(n), ...
-                    gamma_sqrt_stop_B(n)] = computesqrt_sum(K_list, ...
-                                                L_list, num_summands, ...
-                                                dim_A, dim_B, threshold, ...
-                                                N_seeSaw, "sigma_B", ...
-                                                "simple"); 
-            else
-                [sigma_A_start_B_n, sigma_B_start_B_n, beta_sqrt_B(n), ...
-                    sigma_A_sqrt_B_n, sigma_B_sqrt_B_n, gamma_sqrt_B(n), ...
-                    gamma_sqrt_stop_B(n)] = computesqrt(Pi, dim_A, dim_B, ...
-                                                    threshold, N_seeSaw, ...
-                                                    "sigma_B", "simple"); 
-            end
-            if should_save == 1
-                sigma_A_start_B{n} = sigma_A_start_B_n;
-                sigma_B_start_B{n} = sigma_B_start_B_n;
-                sigma_A_sqrt_B{n} = sigma_A_sqrt_B_n;
-                sigma_B_sqrt_B{n} = sigma_B_sqrt_B_n;
-            end
-            sqrt_time_B(n) = toc(sqrt_start_B);
-            clear sigma_A_start_B sigma_B_start_B sigma_A_sqrt_B ...
-                sigma_B_sqrt_B sqrt_start_B;
-        end
-        
-        % revised 1 see-saw from sigma_A
-        if ~any(ismember('sqrt_rev_1_A', dont_do))
-            waitbar(n/N_ops, h, ...
-  sprintf("Instance %d: Square root (revised 1 see-saw from sigma_A)", n));
-            sqrt_start_rev_1 = tic;
-            if sum == 1
-                [sigma_A_rev_1_n, sigma_B_rev_1_n, beta_sqrt_rev_1(n), ...
-                    sigma_A_sqrt_rev_1_n, sigma_B_sqrt_rev_1_n, ...
-                    gamma_sqrt_rev_1(n), ...
-                    gamma_sqrt_stop_rev_1(n)] = computesqrt_sum(K_list, ...
-                                                    L_list, num_summands, ...
-                                                    dim_A, dim_B, ...
-                                                    threshold, N_seeSaw, ...
-                                                    "sigma_A", "rev_1");
-            else
-                [sigma_A_rev_1_n, sigma_B_rev_1_n, beta_sqrt_rev_1(n), ...
-                    sigma_A_sqrt_rev_1_n, sigma_B_sqrt_rev_1_n, ...
-                    gamma_sqrt_rev_1(n), ...
-                    gamma_sqrt_stop_rev_1(n)] = computesqrt(Pi, dim_A, ...
-                                                    dim_B, threshold, ...
-                                                    N_seeSaw, "sigma_A", ...
-                                                    "rev_1");
-            end
-            if should_save == 1
-                sigma_A_rev_1{n} = sigma_A_rev_1_n;
-                sigma_B_rev_1{n} = sigma_B_rev_1_n;
-                sigma_A_sqrt_rev_1{n} = sigma_A_sqrt_rev_1_n;
-                sigma_B_sqrt_rev_1{n} = sigma_B_sqrt_rev_1_n;
-            end
-            sqrt_time_rev_1(n) = toc(sqrt_start_rev_1);
-            clear sigma_A_rev_1 sigma_B_rev_1 sigma_A_sqrt_rev_1 ...
-                sigma_B_sqrt_rev_1 sqrt_start_rev_1;
-        end
-        
-        % revised 1 see-saw from sigma_B
-        if ~any(ismember('sqrt_rev_1_B', dont_do))
-            waitbar(n/N_ops, h, ...
-  sprintf("Instance %d: Square root (revised 1 see-saw from sigma_B)", n));
-            sqrt_start_rev_1_B = tic;
-            if sum == 1
-                [sigma_A_rev_1_B_n, sigma_B_rev_1_B_n, ...
-                    beta_sqrt_rev_1_B(n), sigma_A_sqrt_rev_1_B_n, ...
-                    sigma_B_sqrt_rev_1_B_n, gamma_sqrt_rev_1_B(n), ...
-                    gamma_sqrt_stop_rev_1_B(n)] = computesqrt_sum(K_list, ...
-                                                    L_list, num_summands, ...
-                                                    dim_A, dim_B, ...
-                                                    threshold, N_seeSaw, ...
-                                                    "sigma_B", "rev_1");
-            else
-                [sigma_A_rev_1_B_n, sigma_B_rev_1_B_n, ...
-                    beta_sqrt_rev_1_B(n), sigma_A_sqrt_rev_1_B_n, ...
-                    sigma_B_sqrt_rev_1_B_n, gamma_sqrt_rev_1_B(n), ...
-                    gamma_sqrt_stop_rev_1_B(n)] = computesqrt(Pi, dim_A, ...
-                                                    dim_B, threshold, ...
-                                                    N_seeSaw, "sigma_B", ...
-                                                    "rev_1");
-            end
-            if should_save == 1
-                sigma_A_rev_1_B{n} = sigma_A_rev_1_B_n;
-                sigma_B_rev_1_B{n} = sigma_B_rev_1_B_n;
-                sigma_A_sqrt_rev_1_B{n} = sigma_A_sqrt_rev_1_B_n;
-                sigma_B_sqrt_rev_1_B{n} = sigma_B_sqrt_rev_1_B_n;
-            end
-            sqrt_time_rev_1_B(n) = toc(sqrt_start_rev_1_B);
-            clear sigma_A_rev_1_B_n sigma_B_rev_1_B_n ...
-                sigma_A_sqrt_rev_1_B_n sigma_B_sqrt_rev_1_B_n ...
-                sqrt_start_rev_1_B;
-        end
-        
-        % revised 2 see-saw from sigma_A
-        if ~any(ismember('sqrt_rev_2_A', dont_do))
-            waitbar(n/N_ops, h, ...
-  sprintf("Instance %d: Square root (revised 2 see-saw from sigma_A)", n));
-            sqrt_start_rev_2 = tic;
-            if sum == 1
-                [sigma_A_rev_2_n, sigma_B_rev_2_n, beta_sqrt_rev_2(n), ...
-                    sigma_A_sqrt_rev_2_n, sigma_B_sqrt_rev_2_n, ...
-                    gamma_sqrt_rev_2(n), ...
-                    gamma_sqrt_stop_rev_2(n)] = computesqrt_sum(K_list, ...
-                                                    L_list, num_summands, ...
-                                                    dim_A, dim_B, ...
-                                                    threshold, N_seeSaw, ...
-                                                    "sigma_A", "rev_2");
-            else
-                [sigma_A_rev_2_n, sigma_B_rev_2_n, beta_sqrt_rev_2(n), ...
-                    sigma_A_sqrt_rev_2_n, sigma_B_sqrt_rev_2_n, ...
-                    gamma_sqrt_rev_2(n), ...
-                    gamma_sqrt_stop_rev_2(n)] = computesqrt(Pi, dim_A, ...
-                                                    dim_B, threshold, ...
-                                                    N_seeSaw, "sigma_A", ...
-                                                    "rev_2");
-            end
-            if should_save == 1
-                sigma_A_rev_2{n} = sigma_A_rev_2_n;
-                sigma_B_rev_2{n} = sigma_B_rev_2_n;
-                sigma_A_sqrt_rev_2{n} = sigma_A_sqrt_rev_2_n;
-                sigma_B_sqrt_rev_2{n} = sigma_B_sqrt_rev_2_n;
-            end
-            sqrt_time_rev_2(n) = toc(sqrt_start_rev_2);
-            clear sigma_A_rev_2_n sigma_B_rev_2_n sigma_A_sqrt_rev_2_n ...
-                sigma_B_sqrt_rev_2_n sqrt_start_rev_2;
-        end
-        
-        % revised 2 see-saw from sigma_B
-        if ~any(ismember('sqrt_rev_2_B', dont_do))
-            waitbar(n/N_ops, h, ...
-  sprintf("Instance %d: Square root (revised 2 see-saw from sigma_B)", n));
-            sqrt_start_rev_2_B = tic;
-            if sum == 1
-                [sigma_A_rev_2_B_n, sigma_B_rev_2_B_n, ...
-                    beta_sqrt_rev_2_B(n), sigma_A_sqrt_rev_2_B_n, ...
-                    sigma_B_sqrt_rev_2_B_n, gamma_sqrt_rev_2_B(n), ...
-                    gamma_sqrt_stop_rev_2_B(n)] = computesqrt_sum(K_list, ...
-                                                    L_list, num_summands, ...
-                                                    dim_A, dim_B, ...
-                                                    threshold, N_seeSaw, ...
-                                                    "sigma_B", "rev_2");
-            else
-                [sigma_A_rev_2_B_n, sigma_B_rev_2_B_n, ...
-                    beta_sqrt_rev_2_B(n), sigma_A_sqrt_rev_2_B_n, ...
-                    sigma_B_sqrt_rev_2_B_n, gamma_sqrt_rev_2_B(n), ...
-                    gamma_sqrt_stop_rev_2_B(n)] = computesqrt(Pi, dim_A, ...
-                                                    dim_B, threshold, ...
-                                                    N_seeSaw, "sigma_B", ...
-                                                    "rev_2");
-            end
-            if should_save == 1
-                sigma_A_rev_2_B{n} = sigma_A_rev_2_B_n;
-                sigma_B_rev_2_B{n} = sigma_B_rev_2_B_n;
-                sigma_A_sqrt_rev_2_B{n} = sigma_A_sqrt_rev_2_B_n;
-                sigma_B_sqrt_rev_2_B{n} = sigma_B_sqrt_rev_2_B_n;
-            end
-            sqrt_time_rev_2_B(n) = toc(sqrt_start_rev_2_B);
-            clear sigma_A_rev_2_B_n sigma_B_rev_2_B_n ...
-                sigma_A_sqrt_rev_2_B_n sigma_B_sqrt_rev_2_B_n ...
-                sqrt_start_rev_2_B;
-        end
-        
         %% gamma_MM: See-saw from maximally-mixed state
         % simple see-saw
         if ~any(ismember('MM_simple', dont_do))
@@ -1180,36 +949,6 @@ sprintf("Instance %d: Uniform superposition state (revised 2 see-saw)", n));
             beta = min(beta, min(beta_prime_kr(:, n)));
         end
         
-        % Square root
-        if strcmp(opt, "Pos")
-            if ~any(ismember('sqrt_simple_A', ...
-                    dont_do)) || any(ismember('beta_sqrt', var_list))
-                beta = min(beta, beta_sqrt(n));
-            end
-            if ~any(ismember('sqrt_simple_B', ...
-                    dont_do)) || any(ismember('beta_sqrt_B', var_list))
-                beta = min(beta, beta_sqrt_B(n));
-            end
-            if ~any(ismember('sqrt_rev_1_A', ...
-                    dont_do)) || any(ismember('beta_sqrt_rev_1', var_list))
-                beta = min(beta, beta_sqrt_rev_1(n));
-            end
-            if ~any(ismember('sqrt_rev_1_B', ...
-                    dont_do)) || any(ismember('beta_sqrt_rev_1_B', ...
-                                                var_list))
-                beta = min(beta, beta_sqrt_rev_1_B(n));
-            end
-            if ~any(ismember('sqrt_rev_2_A', ...
-                    dont_do)) || any(ismember('beta_sqrt_rev_2', var_list))
-                beta = min(beta, beta_sqrt_rev_2(n));
-            end
-            if ~any(ismember('sqrt_rev_2_B', ...
-                    dont_do)) || any(ismember('beta_sqrt_rev_2_B', ...
-                                                var_list))
-                beta = min(beta, beta_sqrt_rev_2_B(n));
-            end
-        end  
-        
         %% gamma: Largest upper bound
         gamma = nan;
         
@@ -1253,32 +992,6 @@ sprintf("Instance %d: Uniform superposition state (revised 2 see-saw)", n));
         if ~any(ismember('rand_rev_2', ...
                 dont_do)) || any(ismember('gamma_rand_rev_2', var_list))
             gamma = max(gamma, gamma_rand_rev_2(n));
-        end
-        
-        % Square root
-        if ~any(ismember('sqrt_simple_A', ...
-                dont_do)) || any(ismember('gamma_sqrt', var_list))
-            gamma = max(gamma, gamma_sqrt(n));
-        end
-        if ~any(ismember('sqrt_simple_B', ...
-                dont_do)) || any(ismember('gamma_sqrt_B', var_list))
-            gamma = max(gamma, gamma_sqrt_B(n));
-        end
-        if ~any(ismember('sqrt_rev_1_A', ...
-                dont_do)) || any(ismember('gamma_sqrt_rev_1', var_list))
-            gamma = max(gamma, gamma_sqrt_rev_1(n));
-        end
-        if ~any(ismember('sqrt_rev_1_B', ...
-                dont_do)) || any(ismember('gamma_sqrt_rev_1_B', var_list))
-            gamma = max(gamma, gamma_sqrt_rev_1_B(n));
-        end
-        if ~any(ismember('sqrt_rev_2_A', ...
-                dont_do)) || any(ismember('gamma_sqrt_rev_2', var_list))
-            gamma = max(gamma, gamma_sqrt_rev_2(n));
-        end
-        if ~any(ismember('sqrt_rev_2_B', ...
-                dont_do)) || any(ismember('gamma_sqrt_rev_2_B', var_list))
-            gamma = max(gamma, gamma_sqrt_rev_2_B(n));
         end
         
         %% Tightness of bound
@@ -1387,85 +1100,6 @@ sprintf("Instance %d: Uniform superposition state (revised 2 see-saw)", n));
         save(filename, 'beta_prime_kr', 'beta_prime_kr_time', '-append', ...
                 '-v7.3');
         clear beta_prime_kr beta_prime_kr_time;
-    end
-    
-    % Square root
-    if ~any(ismember('sqrt_simple_A', dont_do))
-        if should_save == 1
-            save(filename, 'sigma_A', 'sigma_B', 'sigma_A_sqrt', ...
-                    'sigma_B_sqrt', '-append', '-v7.3');
-            clear sigma_A sigma_B sigma_A_sqrt sigma_B_sqrt;
-        end
-        save(filename, 'beta_sqrt', 'gamma_sqrt', 'gamma_sqrt_stop', ...
-                'sqrt_time', '-append', '-v7.3');
-        clear beta_sqrt gamma_sqrt gamma_sqrt_stop sqrt_time;
-    end
-    if ~any(ismember('sqrt_simple_B', dont_do))
-        if should_save == 1
-            save(filename, 'sigma_A_start_B', 'sigma_B_start_B', ...
-                 'sigma_A_sqrt_B', 'sigma_B_sqrt_B', '-append', '-v7.3');
-            clear sigma_A_start_B sigma_B_start_B sigma_A_sqrt_B ...
-                sigma_B_sqrt_B;
-        end
-        save(filename, 'beta_sqrt_B', 'gamma_sqrt_B', ...
-                'gamma_sqrt_stop_B', 'sqrt_time_B', '-append', '-v7.3');
-        clear beta_sqrt_B gamma_sqrt_B gamma_sqrt_stop_B sqrt_time;
-    end
-    if ~any(ismember('sqrt_rev_1_A', dont_do))
-        if should_save == 1
-            save(filename, 'sigma_A_rev_1', 'sigma_B_rev_1', ...
-                    'sigma_A_sqrt_rev_1', 'sigma_B_sqrt_rev_1', ...
-                    '-append', '-v7.3');
-            clear sigma_A_rev_1 sigma_B_rev_1 sigma_A_sqrt_rev_1 ...
-                sigma_B_sqrt_rev_1;
-        end
-        save(filename, 'beta_sqrt_rev_1', 'gamma_sqrt_rev_1', ...
-                'gamma_sqrt_stop_rev_1', 'sqrt_time_rev_1', '-append', ...
-                '-v7.3');
-        clear beta_sqrt_rev_1 gamma_sqrt_rev_1 gamma_sqrt_stop_rev_1 ...
-            sqrt_time_rev_1;
-    end
-    if ~any(ismember('sqrt_rev_1_B', dont_do))
-        if should_save == 1
-            save(filename, 'sigma_A_rev_1_B', 'sigma_B_rev_1_B', ...
-                    'sigma_A_sqrt_rev_1_B', 'sigma_B_sqrt_rev_1_B', ...
-                    '-append', '-v7.3');
-            clear sigma_A_rev_1_B sigma_B_rev_1_B sigma_A_sqrt_rev_1_B ...
-                sigma_B_sqrt_rev_1_B;
-        end
-        save(filename, 'beta_sqrt_rev_1_B', 'gamma_sqrt_rev_1_B', ...
-                'gamma_sqrt_stop_rev_1_B', 'sqrt_time_rev_1_B', ...
-                '-append', '-v7.3');
-        clear beta_sqrt_rev_1_B gamma_sqrt_rev_1_B ...
-            gamma_sqrt_stop_rev_1_B sqrt_time_rev_1_B;
-    end
-    if ~any(ismember('sqrt_rev_2_A', dont_do))
-        if should_save == 1
-            save(filename, 'sigma_A_rev_2', 'sigma_B_rev_2', ...
-                    'sigma_A_sqrt_rev_2', 'sigma_B_sqrt_rev_2', ...
-                    '-append', '-v7.3');
-            clear sigma_A_rev_2 sigma_B_rev_2 sigma_A_sqrt_rev_2 ...
-                sigma_B_sqrt_rev_2;
-        end
-        save(filename, 'beta_sqrt_rev_2', 'gamma_sqrt_rev_2', ...
-                'gamma_sqrt_stop_rev_2', 'sqrt_time_rev_2', '-append', ...
-                '-v7.3');
-        clear beta_sqrt_rev_2 gamma_sqrt_rev_2 gamma_sqrt_stop_rev_2 ...
-            sqrt_time_rev_2;
-    end
-    if ~any(ismember('sqrt_rev_2_B', dont_do))
-        if should_save == 1
-            save(filename, 'sigma_A_rev_2_B', 'sigma_B_rev_2_B', ...
-                    'sigma_A_sqrt_rev_2_B', 'sigma_B_sqrt_rev_2_B', ...
-                    '-append', '-v7.3');
-            clear sigma_A_rev_2_B sigma_B_rev_2_B sigma_A_sqrt_rev_2_B ...
-                sigma_B_sqrt_rev_2_B;
-        end
-        save(filename, 'beta_sqrt_rev_2_B', 'gamma_sqrt_rev_2_B', ...
-                'gamma_sqrt_stop_rev_2_B', 'sqrt_time_rev_2_B', ...
-                '-append', '-v7.3');
-        clear beta_sqrt_rev_2_B gamma_sqrt_rev_2_B ...
-            gamma_sqrt_stop_rev_2_B sqrt_time_rev_2_B;
     end
     
     % Maximally-mixed state

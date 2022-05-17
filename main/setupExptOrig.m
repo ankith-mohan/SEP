@@ -1136,58 +1136,48 @@ sprintf("Instance %d: Uniform superposition state (revised 2 see-saw)", n));
         if ~any(ismember('PPT', dont_do)) || any(ismember('beta_PPT', ...
                 var_list))
             beta = min(beta, beta_PPT(n));
-            clear beta_PPT;
         end
 
         % Realignment
         if ~any(ismember('realignment', ...
                 dont_do)) || any(ismember('beta_r', var_list))
             beta = min(beta, beta_r(n));
-            clear beta_r;
         end
         
         % Symmetric Extensions
         if ~any(ismember('SymExtOnly', ...
                 dont_do)) || any(ismember('beta_konly', var_list))
             beta = min(beta, min(beta_konly(:, n)));
-            clear beta_konly;
         end
         if ~any(ismember('SymExtOnlyrlg', ...
                 dont_do)) || any(ismember('beta_konlyr', var_list))
             beta = min(beta, min(beta_konlyr(:, n)));
-            clear beta_konlyr;
         end
         if ~any(ismember('SymExt', ...
                 dont_do)) || any(ismember('beta_k', var_list))
             beta = min(beta, min(beta_k(:, n)));
-            clear beta_k;
         end
         if ~any(ismember('SymExtrlg', ...
                 dont_do)) || any(ismember('beta_kr', var_list))
             beta = min(beta, min(beta_kr(:, n)));
-            clear beta_kr;
         end
         
         % Bosonic Symmetric Extensions
         if ~any(ismember('BosSymExtOnly', ...
                 dont_do)) || any(ismember('beta_prime_konly', var_list))
             beta = min(beta, min(beta_prime_konly(:, n)));
-            clear beta_prime_konly;
         end
         if ~any(ismember('BosSymExtOnlyrlg', ...
                 dont_do)) || any(ismember('beta_prime_konlyr', var_list))
             beta = min(beta, min(beta_prime_konlyr(:, n)));
-            clear beta_prime_konlyr;
         end
         if ~any(ismember('BosSymExt', ...
                 dont_do)) || any(ismember('beta_prime_k', var_list))
             beta = min(beta, min(beta_prime_k(:, n)));
-            clear beta_prime_k;
         end
         if ~any(ismember('BosSymExtrlg', ...
                 dont_do)) || any(ismember('beta_prime_kr', var_list))
             beta = min(beta, min(beta_prime_kr(:, n)));
-            clear beta_prime_kr;
         end
         
         % Square root
@@ -1195,34 +1185,28 @@ sprintf("Instance %d: Uniform superposition state (revised 2 see-saw)", n));
             if ~any(ismember('sqrt_simple_A', ...
                     dont_do)) || any(ismember('beta_sqrt', var_list))
                 beta = min(beta, beta_sqrt(n));
-                clear beta_sqrt;
             end
             if ~any(ismember('sqrt_simple_B', ...
                     dont_do)) || any(ismember('beta_sqrt_B', var_list))
                 beta = min(beta, beta_sqrt_B(n));
-                clear beta_sqrt_B;
             end
             if ~any(ismember('sqrt_rev_1_A', ...
                     dont_do)) || any(ismember('beta_sqrt_rev_1', var_list))
                 beta = min(beta, beta_sqrt_rev_1(n));
-                clear beta_sqrt_rev_1;
             end
             if ~any(ismember('sqrt_rev_1_B', ...
                     dont_do)) || any(ismember('beta_sqrt_rev_1_B', ...
                                                 var_list))
                 beta = min(beta, beta_sqrt_rev_1_B(n));
-                clear beta_sqrt_rev_1_B;
             end
             if ~any(ismember('sqrt_rev_2_A', ...
                     dont_do)) || any(ismember('beta_sqrt_rev_2', var_list))
                 beta = min(beta, beta_sqrt_rev_2(n));
-                clear beta_sqrt_rev_2;
             end
             if ~any(ismember('sqrt_rev_2_B', ...
                     dont_do)) || any(ismember('beta_sqrt_rev_2_B', ...
                                                 var_list))
                 beta = min(beta, beta_sqrt_rev_2_B(n));
-                clear beta_sqrt_rev_2_B;
             end
         end  
         
@@ -1233,83 +1217,68 @@ sprintf("Instance %d: Uniform superposition state (revised 2 see-saw)", n));
         if ~any(ismember('MM_simple', ...
                 dont_do)) || any(ismember('gamma_MM', var_list))
             gamma = max(gamma, gamma_MM(n));
-            clear gamma_MM;
         end
         if ~any(ismember('MM_rev_1', ...
                 dont_do)) || any(ismember('gamma_MM_rev_1', var_list))
             gamma = max(gamma, gamma_MM_rev_1(n));
-            clear gamma_MM_rev_1;
         end
         if ~any(ismember('MM_rev_2', ...
                 dont_do)) || any(ismember('gamma_MM_rev_2', var_list))
             gamma = max(gamma, gamma_MM_rev_2(n));
-            clear gamma_MM_rev_2;
         end
         
         % Uniform superposition state
         if ~any(ismember('US_simple', ...
                 dont_do)) || any(ismember('gamma_US', var_list))
             gamma = max(gamma, gamma_US(n));
-            clear gamma_US;
         end
         if ~any(ismember('US_rev_1', ...
                 dont_do)) || any(ismember('gamma_US_rev_1', var_list))
             gamma = max(gamma, gamma_US_rev_1(n));
-            clear gamma_US_rev_1;
         end
         if ~any(ismember('US_rev_2', ...
                 dont_do)) || any(ismember('gamma_US_rev_2', var_list))
             gamma = max(gamma, gamma_US_rev_2(n));
-            clear gamma_US_rev_2;
         end
         
         % Random starting points
         if ~any(ismember('rand_simple', ...
                 dont_do)) || any(ismember('gamma_rand', var_list))
             gamma = max(gamma, gamma_rand(n));
-            clear gamma_rand;
         end
         if ~any(ismember('rand_rev_1', ...
                 dont_do)) || any(ismember('gamma_rand_rev_1', var_list))
             gamma = max(gamma, gamma_rand_rev_1(n));
-            clear gamma_rand_rev_1;
         end
         if ~any(ismember('rand_rev_2', ...
                 dont_do)) || any(ismember('gamma_rand_rev_2', var_list))
             gamma = max(gamma, gamma_rand_rev_2(n));
-            clear gamma_rand_rev_2;
         end
         
         % Square root
         if ~any(ismember('sqrt_simple_A', ...
                 dont_do)) || any(ismember('gamma_sqrt', var_list))
             gamma = max(gamma, gamma_sqrt(n));
-            clear gamma_sqrt;
         end
         if ~any(ismember('sqrt_simple_B', ...
                 dont_do)) || any(ismember('gamma_sqrt_B', var_list))
             gamma = max(gamma, gamma_sqrt_B(n));
-            clear gamma_sqrt_B;
         end
         if ~any(ismember('sqrt_rev_1_A', ...
                 dont_do)) || any(ismember('gamma_sqrt_rev_1', var_list))
             gamma = max(gamma, gamma_sqrt_rev_1(n));
-            clear gamma_sqrt_rev_1;
         end
         if ~any(ismember('sqrt_rev_1_B', ...
                 dont_do)) || any(ismember('gamma_sqrt_rev_1_B', var_list))
             gamma = max(gamma, gamma_sqrt_rev_1_B(n));
-            clear gamma_sqrt_rev_1_B;
         end
         if ~any(ismember('sqrt_rev_2_A', ...
                 dont_do)) || any(ismember('gamma_sqrt_rev_2', var_list))
             gamma = max(gamma, gamma_sqrt_rev_2(n));
-            clear gamma_sqrt_rev_2;
         end
         if ~any(ismember('sqrt_rev_2_B', ...
                 dont_do)) || any(ismember('gamma_sqrt_rev_2_B', var_list))
             gamma = max(gamma, gamma_sqrt_rev_2_B(n));
-            clear gamma_sqrt_rev_2_B;
         end
         
         %% Tightness of bound
@@ -1576,20 +1545,27 @@ sprintf("Instance %d: Uniform superposition state (revised 2 see-saw)", n));
         if should_save == 1
             save(filename, 'sigma_A_rand_rev_1', 'sigma_B_rand_rev_1', ...
                     '-append', '-v7.3');
+            clear sigma_A_rand_rev_1 sigma_B_rand_rev_1;
         end
         save(filename, 'gamma_rand_list_rev_1', 'gamma_rand_rev_1', ...
             'gamma_rand_stop_rev_1', 'rand_time_rev_1', '-append', '-v7.3');
+        clear gamma_rand_list_rev_1 gamma_rand_rev_1 ...
+            gamma_rand_stop_rev_1 rand_time_rev_1;
     end
     if ~any(ismember('rand_rev_2', dont_do))
         if should_save == 1
             save(filename, 'sigma_A_rand_rev_2', 'sigma_B_rand_rev_2', ...
                     '-append', '-v7.3');
+            clear sigma_A_rand_rev_2 sigma_B_rand_rev_2;
         end
         save(filename, 'gamma_rand_list_rev_2', 'gamma_rand_rev_2', ...
             'gamma_rand_stop_rev_2', 'rand_time_rev_2', '-append', '-v7.3');
+        clear gamma_rand_list_rev_2 gamma_rand_rev_2 ...
+            gamma_rand_stop_rev_2 rand_time_rev_2;
     end
     
     save(filename, 'ToB', '-append', '-v7.3');
+    clear ToB;
     
     close(h);
 end

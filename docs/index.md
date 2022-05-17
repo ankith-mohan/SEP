@@ -5,6 +5,8 @@
 2. Unzip this file in your MATLAB scripts directory
 3. Download [QETLAB](http://www.qetlab.com/Main_Page)
 
+## [List of functions](funcs.md)
+
 ## Getting started: Two introdutory examples
 The first example will cover the generation of a 4 x 4 positive semidefinite matrix and computing the upper and lower bounds on this matrix.
 
@@ -282,5 +284,3 @@ The second example will describe the generation of $$\Pi = \sum\limits_{i=1}^{10
     gamma_rand =
 
         1.6567
-
-## [List of functions](funcs.md)

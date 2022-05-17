@@ -31,8 +31,8 @@ If [genOtimesHouseholder](/helpers/genOtimesHouseholder.md) is used to generate 
 
 ## Driver functions
 These are the functions that can be used to monitor computations of the bounds
-- [setupExpt](/main/setupExpt.md):
-- [executeExpt](/main/executeExpt.md): 
+- [setupExpt](/main/setupExpt.md): Computes the upper and lower bounds for ``N_OPS`` instances.
+- [executeExpt](/main/executeExpt.md): Creates the necessary folder structure for ``SETUPEXPT``.
 
 ## Helper functions
 These are functions that serve auxillary roles with SEP. As an end-user they might not be useful, but are listed anyway.

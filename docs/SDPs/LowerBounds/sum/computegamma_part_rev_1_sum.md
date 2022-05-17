@@ -13,8 +13,9 @@ Computes the density matrix of the respective subsystems, the optimal value and 
 - ``DIM``: dimension of the starting matrix
 - ``THRESHOLD``: threshold to determine convergence
 - ``N_SEESAW``: maximum number of see-saw steps
-- ``OPT``: ``"sigma_A"`` is starting matrix is for Alice's subsystem
-           ``"sigma_B"`` is starting matrix for Bob's subsystem
+- ``OPT``: 
+    - ``"sigma_A"`` is starting matrix is for Alice's subsystem
+    - ``"sigma_B"`` is starting matrix for Bob's subsystem
 
 #### Output arguments
 - ``SIGMA_A``: density matrix for Alice's subsystem
