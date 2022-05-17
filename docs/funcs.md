@@ -24,10 +24,10 @@ These functions compute the lower bound using the See-saw method.
 - [computegamma_rand](/SDPs/LowerBounds/computegamma_rand.md): Computes the density matrix of the respective subsystems, largest of the optimal values, the number of iterations, and the list of optimal values for the see-saw algorithm with random starting points.
 
 If [genOtimesHouseholder](/helpers/genOtimesHouseholder.md) is used to generate the cells of matrices then the following counterparts must be used.
-- [computegamma_part_sum](/SDPs/LowerBounds/computegamma_part_sum.md): Computes the density matrix of the respective subsystems, the optimal value and the number of iterations for the see-saw algorithm.
-- [computegamma_part_rev_1_sum](/SDPs/LowerBounds/computegamma_part_rev_1_sum.md): Computes the density matrix of the respective subsystems, the optimal value and the number of iterations for revision 1 of the see-saw algorithm.
-- [computegamma_part_rev_2_sum](/SDPs/LowerBounds/computegamma_part_rev_2_sum.md): Computes the density matrix of the respective subsystems, the optimal value and the number of iterations for revision 2 of the see-saw algorithm.
-- [computegamma_rand_sum](/SDPs/LowerBounds/computegamma_rand_sum.md): Computes the density matrix of the respective subsystems, largest of the optimal values, the number of iterations, and the list of optimal values for the see-saw algorithm with random starting points.
+- [computegamma_part_sum](/SDPs/LowerBounds/sum/computegamma_part_sum.md): Computes the density matrix of the respective subsystems, the optimal value and the number of iterations for the see-saw algorithm.
+- [computegamma_part_rev_1_sum](/SDPs/LowerBounds/sum/computegamma_part_rev_1_sum.md): Computes the density matrix of the respective subsystems, the optimal value and the number of iterations for revision 1 of the see-saw algorithm.
+- [computegamma_part_rev_2_sum](/SDPs/LowerBounds/sum/computegamma_part_rev_2_sum.md): Computes the density matrix of the respective subsystems, the optimal value and the number of iterations for revision 2 of the see-saw algorithm.
+- [computegamma_rand_sum](/SDPs/LowerBounds/sum/computegamma_rand_sum.md): Computes the density matrix of the respective subsystems, largest of the optimal values, the number of iterations, and the list of optimal values for the see-saw algorithm with random starting points.
 
 ## Driver functions
 These are the functions that can be used to monitor computations of the bounds
